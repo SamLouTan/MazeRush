@@ -23,6 +23,10 @@ namespace MoveCharactere.PlayerControl
         private Rigidbody _playerRigidbody;
         private InputManager _inputManager;
         
+        [SerializeField] private Transform bulletSpawnPoint;
+        [SerializeField] private GameObject bulletPrefab;
+        [SerializeField] private float bulletSpeed = 1000f;
+        
         //Acces aux Animations
         private Animator _animator;
         private bool _grounded = false;
@@ -36,6 +40,9 @@ namespace MoveCharactere.PlayerControl
         private int _groundedHash;
         private int _fallingHash;
         private int _crouchHash;
+        private int _fireHash;
+
+        private bool isFireBeingHeld;
         
         //Camera Variables
         private float _xRotation;
@@ -51,6 +58,7 @@ namespace MoveCharactere.PlayerControl
             _hasAnimator = TryGetComponent<Animator>(out _animator);
             _playerRigidbody = GetComponent<Rigidbody>();
             _inputManager = GetComponent<InputManager>();
+            isFireBeingHeld = false;
 
             _xValHash = Animator.StringToHash("X_Velocity");
             _yValHash = Animator.StringToHash("Y_Velocity");
@@ -59,6 +67,7 @@ namespace MoveCharactere.PlayerControl
             _fallingHash = Animator.StringToHash("Falling");
             _groundedHash = Animator.StringToHash("Grounded");
             _crouchHash = Animator.StringToHash("Crouch");
+            _fireHash = Animator.StringToHash("Fire");
 
         }
 
@@ -68,6 +77,7 @@ namespace MoveCharactere.PlayerControl
             Move();
             HandleJump();
             HandleCrouch();
+            HandleFire();
         }
 
         private void LateUpdate()
@@ -153,10 +163,34 @@ namespace MoveCharactere.PlayerControl
             //Falling
         }
 
+        private void HandleFire()
+        {
+            if (!_hasAnimator) return;
+
+            if (_inputManager.Fire)
+            {
+                if (!isFireBeingHeld)
+                {
+                    isFireBeingHeld = true;
+                    _animator.SetBool(_fireHash, _inputManager.Fire);
+                    Shoot();
+                }
+            }
+            else
+                isFireBeingHeld = false;
+                _animator.SetBool(_fireHash, _inputManager.Fire);
+        }
+
         private void SetAnimationGrounding()
         {
             _animator.SetBool(_fallingHash, !_grounded);
             _animator.SetBool(_groundedHash, _grounded);
+        }
+
+        private void Shoot()
+        {
+            GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
+            bullet.GetComponent<Rigidbody>().velocity = bulletSpawnPoint.forward * bulletSpeed;
         }
     }
 }

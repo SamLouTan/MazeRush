@@ -19,6 +19,8 @@ namespace MoveCharactere.Manager
         public bool Jump { get; private set; }
         public bool Crouch { get; private set; }
         
+        public bool Fire { get; private set; }
+        
         
         //Acces a la Current InputActionMap et aux InputAction Individuellement
         private InputActionMap _currentMap;
@@ -27,6 +29,7 @@ namespace MoveCharactere.Manager
         private InputAction _runAction;
         private InputAction _jumpAction;
         private InputAction _crouchAction;
+        private InputAction _fireAction;
         
         //Obtention de la InputMap et attache au inputAction
         private void Awake()
@@ -38,6 +41,7 @@ namespace MoveCharactere.Manager
             _runAction = _currentMap.FindAction("Run");
             _jumpAction = _currentMap.FindAction("Jump");
             _crouchAction = _currentMap.FindAction("Crouch");
+            _fireAction = _currentMap.FindAction("Fire");
             
             //Start Fonction
             _moveAction.performed += OnMove;
@@ -45,6 +49,7 @@ namespace MoveCharactere.Manager
             _runAction.performed += OnRun;
             _jumpAction.performed += OnJump;
             _crouchAction.performed += OnCrouch;
+            _fireAction.performed += OnFire;
             
             //Stop Fonction
             _moveAction.canceled += OnMove;
@@ -52,6 +57,7 @@ namespace MoveCharactere.Manager
             _runAction.canceled += OnRun;
             _jumpAction.canceled += OnJump;
             _crouchAction.canceled += OnCrouch;
+            _fireAction.canceled += OnFire;
         }
 
         private void Hidecursor()
@@ -86,6 +92,11 @@ namespace MoveCharactere.Manager
         private void OnCrouch(InputAction.CallbackContext context)
         { 
             Crouch = context.ReadValueAsButton();
+        }
+
+        private void OnFire(InputAction.CallbackContext context)
+        {
+            Fire = context.ReadValueAsButton();
         }
         private void OnEnable()
         {
