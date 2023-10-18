@@ -27,11 +27,11 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 1.1833218e-10, z: -2.1093999e-10, w: 1}
   m_LocalPosition: {x: 0, y: -0, z: -0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6209706804946846189}
   - {fileID: 7930688941153856360}
+  - {fileID: 6209706804946846189}
   m_Father: {fileID: 97687426381896395}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &5075182336542786968
@@ -67,7 +67,7 @@ Camera:
     height: 1
   near clip plane: 0.01
   far clip plane: 10
-  field of view: 38.380978
+  field of view: 61.372097
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -1804,7 +1804,7 @@ Transform:
   m_GameObject: {fileID: 5679081678019733292}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.2, y: 0, z: 0.2}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1822,9 +1822,9 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 0.9622642, g: 0.8717954, b: 0.52198297, a: 0.89411765}
-  m_Intensity: 0.3
-  m_Range: 8
-  m_SpotAngle: 45
+  m_Intensity: 0.25
+  m_Range: 7.5
+  m_SpotAngle: 70
   m_InnerSpotAngle: 1
   m_CookieSize: 10
   m_Shadows:
@@ -1951,7 +1951,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6209706804946846189
 Transform:
   m_ObjectHideFlags: 0
@@ -2764,9 +2764,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8721407892246427473}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.019603072, y: 0.00017174768, z: 0.0000033686078, w: 0.99980783}
-  m_LocalPosition: {x: 0.00168, y: 0.0027, z: 0.0053}
-  m_LocalScale: {x: 0.055240855, y: 0.055240862, z: 0.055240855}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7999410096796533105}

@@ -33,6 +33,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "GameMenu",
+                    "type": "Button",
+                    "id": "a63e5e26-695b-4404-bd97-64d1cba2a52d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Jump",
                     "type": "Button",
                     "id": "25752ff2-599b-43f0-852f-6ecd7123fc95",
@@ -140,6 +149,17 @@
                 },
                 {
                     "name": "",
+                    "id": "21bd410d-7c8d-4f57-b64d-a34bb965c8db",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GameMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "a9408526-cc49-4921-858b-a1be438fda18",
                     "path": "<Keyboard>/space",
                     "interactions": "",
@@ -168,6 +188,34 @@
                     "processors": "",
                     "groups": "",
                     "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Menu",
+            "id": "330dda12-01c0-4abc-a7fa-2cecfb10864e",
+            "actions": [
+                {
+                    "name": "GameMenu",
+                    "type": "Button",
+                    "id": "60ac926e-d1c8-4049-9c0b-83d6f4a69632",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "f709faa1-d3bd-4e9e-a5d0-cf619a883ec3",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GameMenu",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

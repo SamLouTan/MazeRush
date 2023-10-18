@@ -12,7 +12,7 @@ using Random = UnityEngine.Random;
 public class MazeGenerator : MonoBehaviour
 {
     [SerializeField] private MazeCell _mazeCellPrefab;
-
+    [SerializeField] private GameObject _inGameMenuPrefab;
     [SerializeField] private int _mazeWidth;
     [SerializeField] private int _mazeDepth;
 
@@ -39,8 +39,13 @@ public class MazeGenerator : MonoBehaviour
         }
         GenerateMaze(null, _mazeGrid[0, 0]); 
         _mazeGrid[_mazeWidth - 1, _mazeDepth - 1].transform.GetChild(0).tag = "Finish";
-        Instantiate(_player, new Vector3(-0.5f, 0.3f, 0.5f), Quaternion.identity).transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
-       
+        GameObject player = Instantiate(_player, new Vector3(-0.5f, 0.3f, 0.5f), Quaternion.identity);
+        player.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
+        InGameMenuManager inGameMenuManager = GetComponent<InGameMenuManager>();
+        inGameMenuManager._player = player;
+       inGameMenuManager.inGameMenu =  Instantiate(_inGameMenuPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+       inGameMenuManager.inGameMenu.SetActive(true);
+        
 
     }
     private void GenerateMaze(MazeCell previousCell, MazeCell currentCell)

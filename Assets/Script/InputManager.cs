@@ -1,4 +1,5 @@
 using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -6,8 +7,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
 
-namespace MoveCharactere.Manager
-{
     public class InputManager : MonoBehaviour
     {
         [SerializeField] private PlayerInput PlayerInput; 
@@ -60,6 +59,17 @@ namespace MoveCharactere.Manager
             _fireAction.canceled += OnFire;
         }
 
+        //Start Fonction
+        _moveAction.performed += OnMove;
+        _lookAction.performed += OnLook;
+        _runAction.performed += OnRun;
+        _displayMenuAction.performed += OnDisplayMenu;
+        //Stop Fonction
+        _moveAction.canceled += OnMove;
+        _lookAction.canceled += OnLook;
+        _runAction.canceled += OnRun;
+        _displayMenuAction.canceled += OnDisplayMenu;
+    }
         private void Hidecursor()
         {
             Cursor.visible = false;
@@ -103,9 +113,59 @@ namespace MoveCharactere.Manager
             _currentMap.Enable();
         }
 
+    private void Update()
+    {
+        if (!DisplayMenu && _isInMenu)
+        {
+            Debug.Log("Close Menu");
+            PlayerInput.defaultActionMap = "Player";
+            PlayerInput.SwitchCurrentActionMap(PlayerInput.defaultActionMap);
+            _isInMenu = false;
+            Hidecursor();
+            Time.timeScale = 1;
+        }
+    }
+
+    private void OnDisplayMenu(InputAction.CallbackContext context)
+    {
+        _isInMenu= true;
+        if (context.canceled)
+        {
+            PlayerInput.defaultActionMap = "Menu";
+            PlayerInput.SwitchCurrentActionMap(PlayerInput.defaultActionMap);
+        }
+        else
+        {
+            DisplayMenu = true;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+
+    }
+    private void OnCloseMenu(InputAction.CallbackContext context)
+    {
+        if (context.canceled)
+        {
+            PlayerInput.defaultActionMap = "Player";
+            PlayerInput.SwitchCurrentActionMap(PlayerInput.defaultActionMap);
+            _isInMenu = false;
+
+
+        }
+        else
+        {
+            DisplayMenu = false;
+            Hidecursor();
+        }
+    }
+
+ 
+    //Onmove Method
+    private void OnMove(InputAction.CallbackContext context)
+    {
+        Move = context.ReadValue<Vector2>();
         private void OnDisable()
         {
             _currentMap.Disable();
         }
     }
-}

@@ -1,38 +1,30 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using MoveCharactere.Manager;
 using Unity.VisualScripting;
 using UnityEngine;
 
-namespace MoveCharactere.PlayerControl
-{
+
     public class PlayerController : MonoBehaviour
     {
         [SerializeField] private float AnimBlendSpeed = 8.9f;
 
-        [SerializeField] private Transform CameraRoot;
-        [SerializeField] private Transform Camera;
-        [SerializeField] private float UpperLimit = -40f;
-        [SerializeField] private float Bottomlimit = 70f;
-        [SerializeField] private float Sensitivity = 21.9f;
-        [SerializeField] private float JumpFactor = 260f;
-        [SerializeField] private float Dis2Ground = 0.8f;
-        [SerializeField] private LayerMask GroundCheck;
+    [SerializeField] private Transform CameraRoot;
+    [SerializeField] private Transform Camera;
+    [SerializeField] private float UpperLimit = CONSTANTS.PLAYER_BOTTOM_LIMIT;
+    [SerializeField] private float Bottomlimit = CONSTANTS.PLAYER_UPPER_LIMIT;
+    [SerializeField] private float Sensitivity = CONSTANTS.MOUSE_SENSITIVITY;
+    private Rigidbody _playerRigidbody;
+    private InputManager _inputManager;
         [SerializeField] private float AirResistance = 0.8f;
-        private Rigidbody _playerRigidbody;
-        private InputManager _inputManager;
-        
+        [SerializeField] private LayerMask GroundCheck;
+        [SerializeField] private float Dis2Ground = 0.8f;
+        [SerializeField] private float JumpFactor = 260f;
         [SerializeField] private Transform bulletSpawnPoint;
         [SerializeField] private GameObject bulletPrefab;
         [SerializeField] private float bulletSpeed = 1000f;
-        
-        //Acces aux Animations
-        private Animator _animator;
         private bool _grounded = false;
         private bool _hasAnimator;
-        
-        //Acces aux HashID de Xvelocity et Yvelocity
         private int _xValHash;
         private int _yValHash;
         private int _zValHash;
@@ -41,6 +33,9 @@ namespace MoveCharactere.PlayerControl
         private int _fallingHash;
         private int _crouchHash;
         private int _fireHash;
+        private Animator _animator;
+        //Acces aux HashID de Xvelocity et Yvelocity
+        //Acces aux Animations
 
         private bool isFireBeingHeld;
         
@@ -193,4 +188,4 @@ namespace MoveCharactere.PlayerControl
             bullet.GetComponent<Rigidbody>().velocity = bulletSpawnPoint.forward * bulletSpeed;
         }
     }
-}
+
