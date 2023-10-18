@@ -4,5 +4,16 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
-  m_configObjects: {}
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 072007830d029ef4c8264d7a90ce4d4a
+  - enabled: 1
+    path: Assets/Scenes/mazeScene.unity
+    guid: bed764f0227c4a94aaadc509143a27c7
+  - enabled: 1
+    path: Assets/Scenes/PlayerScene.unity
+    guid: 7651933672b32ad4f9c03f75c604f709
+  m_configObjects:
+    com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: 93f09e575f38d4b4db8085e9d9d2d8a2, type: 2}
+    com.unity.input.settings: {fileID: 11400000, guid: 90598428035dc964eb4ef16bb16605d5, type: 2}
