@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask GroundCheck;
     [SerializeField] private float Dis2Ground = 0.8f;
     [SerializeField] private float JumpFactor = 260f;
-   // [SerializeField] private Transform bulletSpawnPoint;
+    [SerializeField] private Transform bulletSpawnPoint;
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private float bulletSpeed = 1000f;
     private bool _grounded = false;
@@ -194,8 +194,42 @@ public class PlayerController : MonoBehaviour
     }
 
     private void Shoot()
-    {
-      //  GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
-      //  bullet.GetComponent<Rigidbody>().velocity = bulletSpawnPoint.forward * bulletSpeed;
+    {  
+        if(!_hasAnimator) return;
+        // Define a ray starting from the camera position and going forward
+        Ray ray = new Ray(Camera.transform.position, Camera.transform.forward);
+
+        // Create a RaycastHit variable to store information about what the ray hits
+        RaycastHit hit;
+        // rotate Bulletspwanpoint to camera rotation
+        bulletSpawnPoint.rotation = Camera.rotation;
+        // Check if the ray hits something
+        if (Physics.Raycast(ray, out hit))
+        {
+            // Get the point where the ray hit
+            Vector3 targetPoint = hit.point;
+
+            // Calculate the direction from bulletSpawnPoint to the target point
+            Vector3 direction = (targetPoint - bulletSpawnPoint.position).normalized;
+
+            // Instantiate the bullet
+            GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
+            bullet.transform.localRotation = Quaternion.LookRotation(Camera.right); 
+            // Set the velocity of the bullet to be in the calculated direction
+            bullet.GetComponent<Rigidbody>().velocity = direction * bulletSpeed;
+        }
+        else
+        {
+            Vector3 targetPoint = Camera.transform.position + Camera.transform.forward * 1000f;
+            Vector3 direction = (targetPoint - bulletSpawnPoint.position).normalized;
+
+            // Instantiate the bullet
+            GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
+            bullet.transform.localRotation = Quaternion.LookRotation(Camera.right); 
+            // Set the velocity of the bullet to be in the calculated direction
+            bullet.GetComponent<Rigidbody>().velocity = direction * bulletSpeed;
+        }
     }
+
+
 }

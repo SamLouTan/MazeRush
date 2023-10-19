@@ -157,7 +157,7 @@ MonoBehaviour:
   _inGameMenuPrefab: {fileID: 7574002702031641804, guid: 42978911d4d3a7247b4f340fb78b3ecc, type: 3}
   _mazeWidth: 10
   _mazeDepth: 10
-  _player: {fileID: 1348469000397600113, guid: a5e3dbe1e36fc8c4d9a0a8d6a1467e9c, type: 3}
+  _player: {fileID: 327653562890737359, guid: 0672e18cda1c8594884ffc1f4803f45e, type: 3}
 --- !u!4 &49949005
 Transform:
   m_ObjectHideFlags: 0
@@ -186,7 +186,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inGameMenu: {fileID: 0}
-  _player: {fileID: 1348469000397600113, guid: a5e3dbe1e36fc8c4d9a0a8d6a1467e9c, type: 3}
+  _player: {fileID: 327653562890737359, guid: 0672e18cda1c8594884ffc1f4803f45e, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

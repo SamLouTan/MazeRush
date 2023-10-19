@@ -123,7 +123,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &2016546101
+--- !u!1001 &1906133058
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -131,77 +131,57 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 97687426381896395, guid: a5e3dbe1e36fc8c4d9a0a8d6a1467e9c, type: 3}
+    - target: {fileID: 327653562890737359, guid: 0672e18cda1c8594884ffc1f4803f45e, type: 3}
+      propertyPath: m_Name
+      value: Banana Man - Copy
+      objectReference: {fileID: 0}
+    - target: {fileID: 3608144750661382714, guid: 0672e18cda1c8594884ffc1f4803f45e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.06273413
       objectReference: {fileID: 0}
-    - target: {fileID: 97687426381896395, guid: a5e3dbe1e36fc8c4d9a0a8d6a1467e9c, type: 3}
+    - target: {fileID: 3608144750661382714, guid: 0672e18cda1c8594884ffc1f4803f45e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.00000047683716
       objectReference: {fileID: 0}
-    - target: {fileID: 97687426381896395, guid: a5e3dbe1e36fc8c4d9a0a8d6a1467e9c, type: 3}
+    - target: {fileID: 3608144750661382714, guid: 0672e18cda1c8594884ffc1f4803f45e, type: 3}
       propertyPath: m_LocalPosition.z
+      value: -0.008903027
+      objectReference: {fileID: 0}
+    - target: {fileID: 3608144750661382714, guid: 0672e18cda1c8594884ffc1f4803f45e, type: 3}
+      propertyPath: m_LocalRotation.w
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 97687426381896395, guid: a5e3dbe1e36fc8c4d9a0a8d6a1467e9c, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 97687426381896395, guid: a5e3dbe1e36fc8c4d9a0a8d6a1467e9c, type: 3}
+    - target: {fileID: 3608144750661382714, guid: 0672e18cda1c8594884ffc1f4803f45e, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 97687426381896395, guid: a5e3dbe1e36fc8c4d9a0a8d6a1467e9c, type: 3}
+    - target: {fileID: 3608144750661382714, guid: 0672e18cda1c8594884ffc1f4803f45e, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 97687426381896395, guid: a5e3dbe1e36fc8c4d9a0a8d6a1467e9c, type: 3}
+    - target: {fileID: 3608144750661382714, guid: 0672e18cda1c8594884ffc1f4803f45e, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 97687426381896395, guid: a5e3dbe1e36fc8c4d9a0a8d6a1467e9c, type: 3}
+    - target: {fileID: 3608144750661382714, guid: 0672e18cda1c8594884ffc1f4803f45e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 97687426381896395, guid: a5e3dbe1e36fc8c4d9a0a8d6a1467e9c, type: 3}
+    - target: {fileID: 3608144750661382714, guid: 0672e18cda1c8594884ffc1f4803f45e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
-    - target: {fileID: 97687426381896395, guid: a5e3dbe1e36fc8c4d9a0a8d6a1467e9c, type: 3}
+    - target: {fileID: 3608144750661382714, guid: 0672e18cda1c8594884ffc1f4803f45e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 546514365869518938, guid: a5e3dbe1e36fc8c4d9a0a8d6a1467e9c, type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 13400000, guid: 505c3dbf3178dfc469918c1be2aca4da, type: 2}
-    - target: {fileID: 1348469000397600113, guid: a5e3dbe1e36fc8c4d9a0a8d6a1467e9c, type: 3}
-      propertyPath: m_Name
-      value: Banana Man
-      objectReference: {fileID: 0}
-    - target: {fileID: 1348469000397600113, guid: a5e3dbe1e36fc8c4d9a0a8d6a1467e9c, type: 3}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 5075182336542786968, guid: a5e3dbe1e36fc8c4d9a0a8d6a1467e9c, type: 3}
-      propertyPath: field of view
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 5075182336542786968, guid: a5e3dbe1e36fc8c4d9a0a8d6a1467e9c, type: 3}
-      propertyPath: far clip plane
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 5075182336542786968, guid: a5e3dbe1e36fc8c4d9a0a8d6a1467e9c, type: 3}
-      propertyPath: near clip plane
-      value: 0.01
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: a5e3dbe1e36fc8c4d9a0a8d6a1467e9c, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: 0672e18cda1c8594884ffc1f4803f45e, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 2016546101}
+  - {fileID: 1906133058}
