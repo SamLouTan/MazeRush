@@ -17,7 +17,7 @@ public class InputManager : MonoBehaviour
     public bool Run { get; private set; }
     public bool Jump { get; private set; }
     public bool Crouch { get; private set; }
-    public bool DisplayMenu { get;  set; }
+    public bool DisplayMenu { get; set; }
 
     public bool Fire { get; private set; }
 
@@ -33,9 +33,11 @@ public class InputManager : MonoBehaviour
     private InputAction _crouchAction;
     private InputAction _fireAction;
     private InputAction _displayMenuAction;
+
     private InputAction _closeMenuAction;
+
     //Obtention de la InputMap et attache au inputAction
-    private bool _isInMenu =false;
+    private bool _isInMenu = false;
 
     private void Awake()
     {
@@ -47,13 +49,14 @@ public class InputManager : MonoBehaviour
         _jumpAction = _currentMap.FindAction("Jump");
         _crouchAction = _currentMap.FindAction("Crouch");
         _fireAction = _currentMap.FindAction("Fire");
+        _displayMenuAction = _currentMap.FindAction("GameMenu");
         PlayerInput.defaultActionMap = "Menu";
         PlayerInput.SwitchCurrentActionMap(PlayerInput.defaultActionMap);
         _menuMap = PlayerInput.currentActionMap;
         _closeMenuAction = _menuMap.FindAction("GameMenu");
         _closeMenuAction.performed += OnCloseMenu;
         _closeMenuAction.canceled += OnCloseMenu;
-        
+
 
         PlayerInput.defaultActionMap = "Player";
         PlayerInput.SwitchCurrentActionMap(PlayerInput.defaultActionMap);
@@ -73,112 +76,110 @@ public class InputManager : MonoBehaviour
         _jumpAction.canceled += OnJump;
         _crouchAction.canceled += OnCrouch;
         _fireAction.canceled += OnFire;
-    
 
-    //Start Fonction
-    _moveAction.performed += OnMove;
-    _lookAction.performed += OnLook;
-    _runAction.performed += OnRun;
-    _displayMenuAction.performed += OnDisplayMenu;
 
-    //Stop Fonction
-    _moveAction.canceled += OnMove;
-    _lookAction.canceled += OnLook;
-    _runAction.canceled += OnRun;
-    _displayMenuAction.canceled += OnDisplayMenu;
-}
+        //Start Fonction
+        _moveAction.performed += OnMove;
+        _lookAction.performed += OnLook;
+        _runAction.performed += OnRun;
+        _displayMenuAction.performed += OnDisplayMenu;
 
-private void Hidecursor()
-{
-    Cursor.visible = false;
-    Cursor.lockState = CursorLockMode.Locked;
-}
+        //Stop Fonction
+        _moveAction.canceled += OnMove;
+        _lookAction.canceled += OnLook;
+        _runAction.canceled += OnRun;
+        _displayMenuAction.canceled += OnDisplayMenu;
+    }
 
+    private void Hidecursor()
+    {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+    private void Update()
+    {
+        if (!DisplayMenu && _isInMenu)
+        {
+            PlayerInput.defaultActionMap = "Player";
+            PlayerInput.SwitchCurrentActionMap(PlayerInput.defaultActionMap);
+            _isInMenu = false;
+            Hidecursor();
+            Time.timeScale = 1;
+        }
+    }
+
+    private void OnDisplayMenu(InputAction.CallbackContext context)
+    {
+        _isInMenu = true;
+        if (context.canceled)
+        {
+            PlayerInput.defaultActionMap = "Menu";
+            PlayerInput.SwitchCurrentActionMap(PlayerInput.defaultActionMap);
+        }
+        else
+        {
+            DisplayMenu = true;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+    }
+
+    private void OnCloseMenu(InputAction.CallbackContext context)
+    {
+        if (context.canceled)
+        {
+            PlayerInput.defaultActionMap = "Player";
+            PlayerInput.SwitchCurrentActionMap(PlayerInput.defaultActionMap);
+            _isInMenu = false;
+        }
+        else
+        {
+            DisplayMenu = false;
+            Hidecursor();
+        }
+    }
 //Onmove Method
-private void OnMove(InputAction.CallbackContext context)
-{
-    Move = context.ReadValue<Vector2>();
-}
+    private void OnMove(InputAction.CallbackContext context)
+    {
+        Move = context.ReadValue<Vector2>();
+    }
 
 //OnLook Method
-private void OnLook(InputAction.CallbackContext context)
-{
-    Look = context.ReadValue<Vector2>();
-}
+    private void OnLook(InputAction.CallbackContext context)
+    {
+        Look = context.ReadValue<Vector2>();
+    }
 
 //OnRun Method
-private void OnRun(InputAction.CallbackContext context)
-{
-    Run = context.ReadValueAsButton();
-}
-
-private void OnJump(InputAction.CallbackContext context)
-{
-    Jump = context.ReadValueAsButton();
-}
-
-private void OnCrouch(InputAction.CallbackContext context)
-{
-    Crouch = context.ReadValueAsButton();
-}
-
-private void OnFire(InputAction.CallbackContext context)
-{
-    Fire = context.ReadValueAsButton();
-}
-
-private void OnEnable()
-{
-    _currentMap.Enable();
-}
-
-private void Update()
-{
-    if (!DisplayMenu && _isInMenu)
+    private void OnRun(InputAction.CallbackContext context)
     {
-        Debug.Log("Close Menu");
-        PlayerInput.defaultActionMap = "Player";
-        PlayerInput.SwitchCurrentActionMap(PlayerInput.defaultActionMap);
-        _isInMenu = false;
-        Hidecursor();
-        Time.timeScale = 1;
+        Run = context.ReadValueAsButton();
     }
-}
 
-private void OnDisplayMenu(InputAction.CallbackContext context)
-{
-    _isInMenu = true;
-    if (context.canceled)
+    private void OnJump(InputAction.CallbackContext context)
     {
-        PlayerInput.defaultActionMap = "Menu";
-        PlayerInput.SwitchCurrentActionMap(PlayerInput.defaultActionMap);
+        Jump = context.ReadValueAsButton();
     }
-    else
-    {
-        DisplayMenu = true;
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-    }
-}
 
-private void OnCloseMenu(InputAction.CallbackContext context)
-{
-    if (context.canceled)
+    private void OnCrouch(InputAction.CallbackContext context)
     {
-        PlayerInput.defaultActionMap = "Player";
-        PlayerInput.SwitchCurrentActionMap(PlayerInput.defaultActionMap);
-        _isInMenu = false;
+        Crouch = context.ReadValueAsButton();
     }
-    else
+
+    private void OnFire(InputAction.CallbackContext context)
     {
-        DisplayMenu = false;
-        Hidecursor();
+        Fire = context.ReadValueAsButton();
     }
-}
 
+    private void OnEnable()
+    {
+        _currentMap.Enable();
+    }
 
-private void OnDisable()
-{
-    _currentMap.Disable();
-}
+    private void OnDisable()
+    {
+        _currentMap.Disable();
+    }
+
+  
 }

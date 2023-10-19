@@ -43,7 +43,7 @@ Camera:
   m_GameObject: {fileID: 176439235097601426}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 4
+  m_ClearFlags: 1
   m_BackGroundColor: {r: 0.31847632, g: 0.32669988, b: 0.33962262, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -67,13 +67,13 @@ Camera:
     height: 1
   near clip plane: 0.01
   far clip plane: 10
-  field of view: 61.372097
+  field of view: 56.31238
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 7
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -952,7 +952,7 @@ Animator:
   m_GameObject: {fileID: 1348469000397600113}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 81bb9eea30387e442899949a80011e55, type: 3}
-  m_Controller: {fileID: 9100000, guid: dd185e688404df741b6a89f2d95a0d97, type: 2}
+  m_Controller: {fileID: 9100000, guid: 331127898af675a47b96ab5badfabecd, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -997,7 +997,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1348469000397600113}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 505c3dbf3178dfc469918c1be2aca4da, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -1052,10 +1052,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 1348469000397600113}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed825ced7d7819c499588398c901b69f, type: 3}
+  m_Script: {fileID: 11500000, guid: 9f37efcb0f7d4494ebe5f40cfd6a154b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerInput: {fileID: 4875942589064917566}
+  AnimBlendSpeed: 8.9
+  CameraRoot: {fileID: 7870685526022618774}
+  Camera: {fileID: 1477654469884563727}
+  UpperLimit: -40
+  Bottomlimit: 70
+  Sensitivity: 20
+  AirResistance: 0.8
+  GroundCheck:
+    serializedVersion: 2
+    m_Bits: 1
+  Dis2Ground: 0.8
+  JumpFactor: 260
+  bulletPrefab: {fileID: 3575611928538805115, guid: 745a87995944ab94caa447ec2061dbc4, type: 3}
+  bulletSpeed: 1000
 --- !u!114 &2671682132405392992
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1065,15 +1078,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1348469000397600113}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a34519df6bb5d1e48adce6396e7dc1b2, type: 3}
+  m_Script: {fileID: 11500000, guid: 19266704fef5781479b6ce8c85fb77d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AnimBlendSpeed: 8.9
-  CameraRoot: {fileID: 7870685526022618774}
-  Camera: {fileID: 1477654469884563727}
-  UpperLimit: -35
-  Bottomlimit: 70
-  Sensitivity: 10
+  PlayerInput: {fileID: 4875942589064917566}
 --- !u!1 &1382997839718772174
 GameObject:
   m_ObjectHideFlags: 0

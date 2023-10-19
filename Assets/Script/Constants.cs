@@ -1,6 +1,6 @@
 public static class CONSTANTS
 {
-    public static float MOUSE_SENSITIVITY { get; set; } = 1f;
+    public static float MOUSE_SENSITIVITY { get; set; } = 21f;
     public static float PLAYER_SPEED { get; set; } = 4f;
     public static float PLAYER_RUN_SPEED { get; set; } = 6f;
     public static float PLAYER_WALK_SPEED { get; set; } = 2f;

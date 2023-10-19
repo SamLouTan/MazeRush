@@ -155,8 +155,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mazeCellPrefab: {fileID: 3450343184570848526, guid: bcef6985665979944b15372ee432134b, type: 3}
   _inGameMenuPrefab: {fileID: 7574002702031641804, guid: 42978911d4d3a7247b4f340fb78b3ecc, type: 3}
-  _mazeWidth: 20
-  _mazeDepth: 20
+  _mazeWidth: 10
+  _mazeDepth: 10
   _player: {fileID: 1348469000397600113, guid: a5e3dbe1e36fc8c4d9a0a8d6a1467e9c, type: 3}
 --- !u!4 &49949005
 Transform:
