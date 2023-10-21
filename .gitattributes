@@ -1,1 +1,2 @@
 .wav filter=lfs diff=lfs merge=lfs -text
+Assets/Préfab/Music/* filter=lfs diff=lfs merge=lfs -text
