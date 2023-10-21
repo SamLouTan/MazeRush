@@ -49,6 +49,7 @@ public class PlayerController : MonoBehaviour
     private const float _walkSpeed = 2f;
     private const float _runSpeed = 6f;
 
+    private Vector3 startPosition;
     private Vector2 _currentVelocity;
 
     private void Start()
@@ -57,7 +58,6 @@ public class PlayerController : MonoBehaviour
         _playerRigidbody = GetComponent<Rigidbody>();
         _inputManager = GetComponent<InputManager>();
         isFireBeingHeld = false;
-
         _xValHash = Animator.StringToHash("X_Velocity");
         _yValHash = Animator.StringToHash("Y_Velocity");
         _zValHash = Animator.StringToHash("Z_Velocity");
@@ -66,6 +66,7 @@ public class PlayerController : MonoBehaviour
         _groundedHash = Animator.StringToHash("Grounded");
         _crouchHash = Animator.StringToHash("Crouch");
         _fireHash = Animator.StringToHash("Fire");
+        startPosition = transform.position;
     }
 
     private void FixedUpdate()
@@ -80,6 +81,14 @@ public class PlayerController : MonoBehaviour
     private void LateUpdate()
     {
         CamMouvements();
+    }
+    
+    void OnCollisionStay(Collision collision) // Respawn
+    {
+        if (collision.gameObject.tag == "Ground")
+        {
+            transform.position = startPosition;
+        }
     }
 
     private void Move()
