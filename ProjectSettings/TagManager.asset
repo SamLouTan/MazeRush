@@ -9,6 +9,7 @@ TagManager:
   - ButtonStart
   - ButtonExit
   - Coin
+  - Ground
   layers:
   - Default
   - TransparentFX
