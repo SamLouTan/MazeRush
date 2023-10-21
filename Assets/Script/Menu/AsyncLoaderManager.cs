@@ -11,13 +11,14 @@ public class AsyncLoaderManager : MonoBehaviour
 {
     [SerializeField] private Slider _slider;
     [SerializeField] private TextMeshProUGUI _progressText;
+    private float progress;
 
-  
 
     public void LoadScene(string sceneName)
     {
         StartCoroutine(LoadSceneAsync(sceneName));
     }
+
     public void LoadScene(int sceneIndex)
     {
         StartCoroutine(LoadSceneAsync(sceneIndex));
@@ -25,29 +26,36 @@ public class AsyncLoaderManager : MonoBehaviour
 
     private IEnumerator LoadSceneAsync(string sceneName)
     {
-        AsyncOperation asyncLoad = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(sceneName);
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
 
         while (!asyncLoad.isDone)
         {
-            float progress = Mathf.Clamp01(asyncLoad.progress / .9f);
-            _slider.value = progress*100;
+            progress = Mathf.Clamp01(asyncLoad.progress / .9f);
+            _slider.value = progress * 100;
             _progressText.text = $"{progress * 100}%";
             yield return null;
         }
     }
+
     private IEnumerator LoadSceneAsync(int sceneIndex)
     {
-        AsyncOperation asyncLoad = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(sceneIndex);
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneIndex);
 
 
         while (!asyncLoad.isDone)
         {
-            float progress = Mathf.Clamp01(asyncLoad.progress / .9f);
+            Debug.Log("Loading");
+            progress = Mathf.Clamp01(asyncLoad.progress / .9f);
             _slider.value = progress;
             _progressText.text = $"{progress * 100}%";
+            Debug.Log(progress);
             yield return null;
         }
-        
     }
-   
+
+    private void Update()
+    {
+        _slider.value = progress;
+        _progressText.text = $"{progress * 100}%";
+    }
 }

@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -66,6 +62,8 @@ public class PlayerController : MonoBehaviour
         _groundedHash = Animator.StringToHash("Grounded");
         _crouchHash = Animator.StringToHash("Crouch");
         _fireHash = Animator.StringToHash("Fire");
+        UnityEngine.Camera.main!.fieldOfView = 90f;
+        
     }
 
     private void FixedUpdate()
@@ -87,32 +85,27 @@ public class PlayerController : MonoBehaviour
         if (!_hasAnimator) return;
 
         float targetSpeed = _inputManager.Run ? _runSpeed : _walkSpeed;
-        if (_inputManager.Crouch) targetSpeed = 1.5f;
+        if(_inputManager.Crouch) targetSpeed = 1.5f;
         if (_inputManager.Move == Vector2.zero) targetSpeed = 0;
 
         //A Supprimer si on veut deplacement dans l'air
         if (_grounded)
         {
-            _currentVelocity.x = Mathf.Lerp(_currentVelocity.x, _inputManager.Move.x * targetSpeed,
-                AnimBlendSpeed * Time.deltaTime);
-            _currentVelocity.y = Mathf.Lerp(_currentVelocity.y, _inputManager.Move.y * targetSpeed,
-                AnimBlendSpeed * Time.deltaTime);
+            _currentVelocity.x = Mathf.Lerp(_currentVelocity.x, _inputManager.Move.x * targetSpeed, AnimBlendSpeed * Time.deltaTime);
+            _currentVelocity.y = Mathf.Lerp(_currentVelocity.y, _inputManager.Move.y * targetSpeed, AnimBlendSpeed * Time.deltaTime);
 
             var xVelDifference = _currentVelocity.x - _playerRigidbody.velocity.x;
             var zVelDifference = _currentVelocity.y - _playerRigidbody.velocity.y;
 
-            _playerRigidbody.AddForce(transform.TransformVector(new Vector3(xVelDifference, 0, zVelDifference)),
-                ForceMode.VelocityChange);
+            _playerRigidbody.AddForce(transform.TransformVector(new Vector3(xVelDifference,0,zVelDifference)),ForceMode.VelocityChange);   
         }
         else
         {
-            _playerRigidbody.AddForce(
-                transform.TransformVector(new Vector3(_currentVelocity.x * AirResistance, 0,
-                    _currentVelocity.y * AirResistance)), ForceMode.VelocityChange);
+            _playerRigidbody.AddForce(transform.TransformVector(new Vector3(_currentVelocity.x * AirResistance ,0, _currentVelocity.y * AirResistance)), ForceMode.VelocityChange);
         }
 
-        _animator.SetFloat(_xValHash, _currentVelocity.x);
-        _animator.SetFloat(_yValHash, _currentVelocity.y);
+        _animator.SetFloat(_xValHash,_currentVelocity.x);
+        _animator.SetFloat(_yValHash,_currentVelocity.y);
     }
 
     private void CamMouvements()
@@ -161,11 +154,16 @@ public class PlayerController : MonoBehaviour
             SetAnimationGrounding();
             return;
         }
-
         _grounded = false;
         _animator.SetFloat(_zValHash, _playerRigidbody.velocity.y);
         SetAnimationGrounding();
         //Falling
+    }
+
+    private void SetAnimationGrounding()
+    {
+        _animator.SetBool(_fallingHash, !_grounded);
+        _animator.SetBool(_groundedHash, _grounded);
     }
 
     private void HandleFire()
@@ -186,23 +184,20 @@ public class PlayerController : MonoBehaviour
 
         _animator.SetBool(_fireHash, _inputManager.Fire);
     }
-
-    private void SetAnimationGrounding()
-    {
-        _animator.SetBool(_fallingHash, !_grounded);
-        _animator.SetBool(_groundedHash, _grounded);
-    }
-
+    
     private void Shoot()
     {  
         if(!_hasAnimator) return;
+        Transform cameratransform = Camera.transform;
         // Define a ray starting from the camera position and going forward
-        Ray ray = new Ray(Camera.transform.position, Camera.transform.forward);
+        Ray ray = new Ray(cameratransform.position, cameratransform.forward);
 
         // Create a RaycastHit variable to store information about what the ray hits
         RaycastHit hit;
         // rotate Bulletspwanpoint to camera rotation
         bulletSpawnPoint.rotation = Camera.rotation;
+        Vector3 bulletSpawnPointPosition = bulletSpawnPoint.position;
+    
         // Check if the ray hits something
         if (Physics.Raycast(ray, out hit))
         {
@@ -213,18 +208,18 @@ public class PlayerController : MonoBehaviour
             Vector3 direction = (targetPoint - bulletSpawnPoint.position).normalized;
 
             // Instantiate the bullet
-            GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
+            GameObject bullet = Instantiate(bulletPrefab,bulletSpawnPointPosition, Quaternion.identity);
             bullet.transform.localRotation = Quaternion.LookRotation(Camera.right); 
             // Set the velocity of the bullet to be in the calculated direction
             bullet.GetComponent<Rigidbody>().velocity = direction * bulletSpeed;
         }
         else
         {
-            Vector3 targetPoint = Camera.transform.position + Camera.transform.forward * 1000f;
+            Vector3 targetPoint = cameratransform.position + cameratransform.forward * 1000f;
             Vector3 direction = (targetPoint - bulletSpawnPoint.position).normalized;
 
             // Instantiate the bullet
-            GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
+            GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPointPosition, Quaternion.identity);
             bullet.transform.localRotation = Quaternion.LookRotation(Camera.right); 
             // Set the velocity of the bullet to be in the calculated direction
             bullet.GetComponent<Rigidbody>().velocity = direction * bulletSpeed;

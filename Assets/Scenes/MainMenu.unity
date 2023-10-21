@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3811,7 +3811,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Shift
+  m_text: Maj
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
   m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
@@ -6531,6 +6531,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1424245435}
     m_Modifications:
+    - target: {fileID: 3772155989557812719, guid: 6a2b9a5071f055945921cf0e147e56d1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -98.931885
+      objectReference: {fileID: 0}
     - target: {fileID: 4248473274508664535, guid: 6a2b9a5071f055945921cf0e147e56d1, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -6619,8 +6623,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: LoadingUI
       objectReference: {fileID: 0}
+    - target: {fileID: 9101602277716815655, guid: 6a2b9a5071f055945921cf0e147e56d1, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 5.7474
+      objectReference: {fileID: 0}
+    - target: {fileID: 9101602277716815655, guid: 6a2b9a5071f055945921cf0e147e56d1, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3.5160205
+      objectReference: {fileID: 0}
+    - target: {fileID: 9101602277716815655, guid: 6a2b9a5071f055945921cf0e147e56d1, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 3772155989569099597, guid: 6a2b9a5071f055945921cf0e147e56d1, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a2b9a5071f055945921cf0e147e56d1, type: 3}

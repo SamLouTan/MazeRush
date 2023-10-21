@@ -47,7 +47,13 @@ public class InGameMenuManager : MonoBehaviour
             });
         });
         mainMenu = pauseMenu.transform.GetChild(3).gameObject;
-        mainMenu.GetComponent<Button>().onClick.AddListener(() => { SceneManager.LoadScene(0); });
+        mainMenu.GetComponent<Button>().onClick.AddListener(() =>
+        {
+            Player player = _player.GetComponent<Player>();
+            SaveManager.SavePlayer(player);
+          if(GetComponent<MazeGenerator>() != null)  SaveManager.SaveMaze(GetComponent<MazeGenerator>());
+            SceneManager.LoadScene(0);
+        });
     }
 
 
