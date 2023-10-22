@@ -13,6 +13,8 @@ public class MainMenu : MonoBehaviour
     private GameObject _subSettingsMenu;
     [SerializeField] 
     private GameObject _loadingScreen;
+    [SerializeField] 
+    private GameObject _levelSelector;
     
     [SerializeField] private AsyncLoaderManager _asyncLoaderManager;
     private void Awake()
@@ -22,12 +24,14 @@ public class MainMenu : MonoBehaviour
         _subMainMenu.SetActive(false);
         _subSettingsMenu.SetActive(false);
         _loadingScreen.SetActive(false);
+        _levelSelector.SetActive(false);
 
     }
 
     public void StartGame()
     {
         _subMainMenu.SetActive(false);
+        _levelSelector.SetActive(false);
         _loadingScreen.SetActive(true);
         _asyncLoaderManager.LoadScene(1);
     }
@@ -36,13 +40,15 @@ public class MainMenu : MonoBehaviour
     {
         _subMainMenu.SetActive(false);
         _subSettingsMenu.SetActive(false);
+        _levelSelector.SetActive(false);
         _mainMenu.SetActive(true);
     }
     public void PlayGame()
     {
         //display sub menu ui 
        _subMainMenu.SetActive(true);
-        _mainMenu.SetActive(false);
+       _levelSelector.SetActive(false);
+       _mainMenu.SetActive(false);
     }
 
     public void Settings()
@@ -52,9 +58,17 @@ public class MainMenu : MonoBehaviour
         _subSettingsMenu.SetActive(true);
         _subMainMenu.SetActive(false);
         _mainMenu.SetActive(false);
+        _levelSelector.SetActive(false);
         
     }
-    
+
+    public void LevelSelector()
+    {
+        //Display Level Selector
+        _subMainMenu.SetActive(false);
+        _mainMenu.SetActive(false);
+        _levelSelector.SetActive(true);
+    }
     public void QuitGame()
     {
         Debug.Log("Quit");
