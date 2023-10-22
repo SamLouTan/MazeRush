@@ -1,8 +1,15 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 
 public class PlayerController : MonoBehaviour
 {
+    [System.Serializable]
+    public class MouseSensitivityChangeEvent : UnityEvent<float> { }
+    
+    public MouseSensitivityChangeEvent OnMouseSensitivityChange;
+    
+    
     [SerializeField] private float AnimBlendSpeed = 8.9f;
 
     [SerializeField] private Transform CameraRoot;
@@ -48,6 +55,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 startPosition;
     private Vector2 _currentVelocity;
 
+    
     private void Start()
     {
         _hasAnimator = TryGetComponent<Animator>(out _animator);
@@ -62,12 +70,9 @@ public class PlayerController : MonoBehaviour
         _groundedHash = Animator.StringToHash("Grounded");
         _crouchHash = Animator.StringToHash("Crouch");
         _fireHash = Animator.StringToHash("Fire");
-<<<<<<< HEAD:Assets/Script/Player/PlayerController.cs
         UnityEngine.Camera.main!.fieldOfView = 90f;
-        
-=======
         startPosition = transform.position;
->>>>>>> Jump:Assets/Script/PlayerController.cs
+
     }
 
     private void FixedUpdate()
@@ -77,6 +82,7 @@ public class PlayerController : MonoBehaviour
         HandleJump();
         HandleCrouch();
         HandleFire();
+        Debug.Log(Sensitivity);
     }
 
     private void LateUpdate()
@@ -86,12 +92,18 @@ public class PlayerController : MonoBehaviour
     
     void OnCollisionStay(Collision collision) // Respawn
     {
-        if (collision.gameObject.tag == "Ground")
+        if (collision.gameObject.CompareTag("Ground"))
         {
             transform.position = startPosition;
         }
     }
 
+    public void ChangeMouseSensitivity(float newSensitivity)
+    {
+        Sensitivity = newSensitivity;
+        if(OnMouseSensitivityChange != null) OnMouseSensitivityChange.Invoke(newSensitivity);
+        //save mouse sensitivity in PlayerPrefs with other settings
+    }
     private void Move()
     {
         if (!_hasAnimator) return;

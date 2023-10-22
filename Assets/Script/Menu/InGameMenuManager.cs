@@ -1,5 +1,7 @@
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -17,6 +19,8 @@ public class InGameMenuManager : MonoBehaviour
     private GameObject mainMenu;
     private bool _isMenuOpen;
     private bool _isInSettings;
+    private Slider _slider;
+
 
     private void Start()
     {
@@ -34,10 +38,13 @@ public class InGameMenuManager : MonoBehaviour
         settings.GetComponent<Button>().onClick.AddListener(() =>
         {
             pauseMenu.gameObject.SetActive(false);
-            _isInSettings= true;
+            _isInSettings = true;
             inGameMenu.transform.GetChild(0).GetChild(1).gameObject.SetActive(true);
             controls = inGameMenu.transform.GetChild(0).GetChild(1).GetChild(0).gameObject;
+            _slider = controls.transform.GetChild(8).GetComponent<Slider>();
 
+
+            _slider.onValueChanged.AddListener(OnSensitiveChange);
 
             controls.transform.GetChild(6).GetComponent<Button>().onClick.AddListener(() =>
             {
@@ -51,11 +58,17 @@ public class InGameMenuManager : MonoBehaviour
         {
             Player player = _player.GetComponent<Player>();
             SaveManager.SavePlayer(player);
-          if(GetComponent<MazeGenerator>() != null)  SaveManager.SaveMaze(GetComponent<MazeGenerator>());
+            if (GetComponent<MazeGenerator>() != null) SaveManager.SaveMaze(GetComponent<MazeGenerator>());
             SceneManager.LoadScene(0);
         });
     }
 
+    public void OnSensitiveChange(float value)
+    {
+        Debug.Log(value);
+        _slider.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = System.MathF.Round(value, 2).ToString("F2");
+        _player.GetComponent<PlayerController>().ChangeMouseSensitivity(value);
+    }
 
     // Update is called once per frame
     void Update()
@@ -64,7 +77,7 @@ public class InGameMenuManager : MonoBehaviour
         {
             Time.timeScale = 0;
             inGameMenu.SetActive(true);
-            if(_isInSettings==false) pauseMenu.SetActive(true);
+            if (_isInSettings == false) pauseMenu.SetActive(true);
         }
         else
         {

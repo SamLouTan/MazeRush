@@ -157,7 +157,7 @@ MonoBehaviour:
   _inGameMenuPrefab: {fileID: 7574002702031641804, guid: 42978911d4d3a7247b4f340fb78b3ecc, type: 3}
   _mazeWidth: 10
   _mazeDepth: 10
-  _player: {fileID: 1724227146957505261, guid: 6dc28b556807f2641bb0720355bcdf47, type: 3}
+  _player: {fileID: 1724227146957505261, guid: 7e6585aba8e6c924083b5d00b0fbb1a0, type: 3}
   _jumpscare:
   - {fileID: 8300000, guid: 2e1865ca1a787b44e8a6458627e15c81, type: 3}
   - {fileID: 8300000, guid: 28b72841e7337b84dbc4a444cbfcd60d, type: 3}
