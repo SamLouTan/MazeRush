@@ -1,5 +1,7 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 
 public class PlayerController : MonoBehaviour
@@ -72,6 +74,13 @@ public class PlayerController : MonoBehaviour
         _fireHash = Animator.StringToHash("Fire");
         UnityEngine.Camera.main!.fieldOfView = 90f;
         startPosition = transform.position;
+        // get weapon instance from player and disable it if its in maze scene
+        if (SceneManager.GetActiveScene().name == "mazeScene")
+        {
+            transform.GetChild(1).GetChild(0).GetChild(2).GetChild(0).GetChild(0).GetChild(2).gameObject.SetActive(false);
+            // get animation in blend tree
+            
+        }
 
     }
 
@@ -82,7 +91,6 @@ public class PlayerController : MonoBehaviour
         HandleJump();
         HandleCrouch();
         HandleFire();
-        Debug.Log(Sensitivity);
     }
 
     private void LateUpdate()
@@ -102,6 +110,7 @@ public class PlayerController : MonoBehaviour
     {
         Sensitivity = newSensitivity;
         if(OnMouseSensitivityChange != null) OnMouseSensitivityChange.Invoke(newSensitivity);
+        PlayerPrefs.SetFloat("MouseSensitivity", newSensitivity);
         //save mouse sensitivity in PlayerPrefs with other settings
     }
     private void Move()
@@ -192,6 +201,8 @@ public class PlayerController : MonoBehaviour
 
     private void HandleFire()
     {
+        if(SceneManager.GetActiveScene().name =="mazeScene")return;
+        
         if (!_hasAnimator) return;
 
         if (_inputManager.Fire)
@@ -210,7 +221,7 @@ public class PlayerController : MonoBehaviour
     }
     
     private void Shoot()
-    {  
+    { 
         if(!_hasAnimator) return;
         Transform cameratransform = Camera.transform;
         // Define a ray starting from the camera position and going forward

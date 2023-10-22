@@ -33,6 +33,7 @@ public class InGameMenuManager : MonoBehaviour
         {
             pauseMenu.SetActive(false);
             _inputManager.DisplayMenu = false;
+            
         });
         settings = pauseMenu.transform.GetChild(2).gameObject;
         settings.GetComponent<Button>().onClick.AddListener(() =>
@@ -44,9 +45,10 @@ public class InGameMenuManager : MonoBehaviour
             _slider = controls.transform.GetChild(8).GetComponent<Slider>();
 
 
-            _slider.onValueChanged.AddListener(OnSensitiveChange);
+            _slider.onValueChanged
+                .AddListener(OnSensitivityChange); // add listener to slider to change mouse sensitivity
 
-            controls.transform.GetChild(6).GetComponent<Button>().onClick.AddListener(() =>
+            controls.transform.GetChild(6).GetComponent<Button>().onClick.AddListener(() =>// back button to pause menu
             {
                 controls.transform.parent.gameObject.SetActive(false);
                 pauseMenu.gameObject.SetActive(true);
@@ -54,7 +56,7 @@ public class InGameMenuManager : MonoBehaviour
             });
         });
         mainMenu = pauseMenu.transform.GetChild(3).gameObject;
-        mainMenu.GetComponent<Button>().onClick.AddListener(() =>
+        mainMenu.GetComponent<Button>().onClick.AddListener(() =>// main menu button
         {
             Player player = _player.GetComponent<Player>();
             SaveManager.SavePlayer(player);
@@ -63,10 +65,11 @@ public class InGameMenuManager : MonoBehaviour
         });
     }
 
-    public void OnSensitiveChange(float value)
+    public void OnSensitivityChange(float value)
     {
         Debug.Log(value);
-        _slider.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = System.MathF.Round(value, 2).ToString("F2");
+        _slider.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text =
+            System.MathF.Round(value, 2).ToString("F2");
         _player.GetComponent<PlayerController>().ChangeMouseSensitivity(value);
     }
 
@@ -75,14 +78,14 @@ public class InGameMenuManager : MonoBehaviour
     {
         if (_inputManager.DisplayMenu)
         {
-            Time.timeScale = 0;
+            Time.timeScale = 0; // stop time
             inGameMenu.SetActive(true);
-            if (_isInSettings == false) pauseMenu.SetActive(true);
+            if (_isInSettings == false) pauseMenu.SetActive(true); // activate pause menu if not in settings menu
         }
         else
         {
-            inGameMenu.gameObject.gameObject.SetActive(false);
-            Time.timeScale = 1;
+            inGameMenu.gameObject.gameObject.SetActive(false); // deactivate menu
+            Time.timeScale = 1; // resume time
         }
     }
 }

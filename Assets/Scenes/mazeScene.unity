@@ -17,7 +17,7 @@ RenderSettings:
   m_Fog: 1
   m_FogColor: {r: 0.09803922, g: 0.09803922, b: 0.09803922, a: 1}
   m_FogMode: 3
-  m_FogDensity: 0.5
+  m_FogDensity: 0.75
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientSkyColor: {r: 0, g: 0, b: 0, a: 1}
@@ -27,7 +27,7 @@ RenderSettings:
   m_AmbientMode: 3
   m_SubtractiveShadowColor: {r: 0, g: 0, b: 0, a: 1}
   m_SkyboxMaterial: {fileID: 0}
-  m_HaloStrength: 0.5
+  m_HaloStrength: 0
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
   m_HaloTexture: {fileID: 0}
@@ -163,6 +163,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 28b72841e7337b84dbc4a444cbfcd60d, type: 3}
   - {fileID: 8300000, guid: 8e72eaede97968242b58869dcd7783f6, type: 3}
   - {fileID: 8300000, guid: ef72bc8c7e714e048adac67d081d77d9, type: 3}
+  - {fileID: 8300000, guid: a7d60db326d3b7b41a94400ed811b4e6, type: 3}
 --- !u!4 &49949005
 Transform:
   m_ObjectHideFlags: 0
@@ -192,7 +193,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inGameMenu: {fileID: 0}
-  _player: {fileID: 1724227146957505261, guid: 6dc28b556807f2641bb0720355bcdf47, type: 3}
+  _player: {fileID: 1724227146957505261, guid: 7e6585aba8e6c924083b5d00b0fbb1a0, type: 3}
 --- !u!1 &1078055150
 GameObject:
   m_ObjectHideFlags: 0

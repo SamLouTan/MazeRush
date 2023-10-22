@@ -79,6 +79,7 @@ public class MazeGenerator : MonoBehaviour
         player.GetComponent<Player>().CurrentRoom = 3;
         inGameMenuManager.inGameMenu = Instantiate(_inGameMenuPrefab, new Vector3(0, 0, 0), Quaternion.identity);
         inGameMenuManager.inGameMenu.SetActive(true);
+        
 
         StartCoroutine(PlayRandomSound());
     }
