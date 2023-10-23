@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     [System.Serializable]
     public class MouseSensitivityChangeEvent : UnityEvent<float> { }
     
-    public MouseSensitivityChangeEvent OnMouseSensitivityChange;
+    public MouseSensitivityChangeEvent onMouseSensitivityChange;
     
     
     [SerializeField] private float AnimBlendSpeed = 8.9f;
@@ -57,7 +57,14 @@ public class PlayerController : MonoBehaviour
     private Vector3 startPosition;
     private Vector2 _currentVelocity;
 
-    
+    private void Awake()
+    {
+        if (PlayerPrefs.HasKey("MouseSensitivity"))
+        {
+            Sensitivity = PlayerPrefs.GetFloat("MouseSensitivity");
+        }
+    }
+
     private void Start()
     {
         _hasAnimator = TryGetComponent<Animator>(out _animator);
@@ -74,14 +81,6 @@ public class PlayerController : MonoBehaviour
         _fireHash = Animator.StringToHash("Fire");
         UnityEngine.Camera.main!.fieldOfView = 90f;
         startPosition = transform.position;
-        // get weapon instance from player and disable it if its in maze scene
-        if (SceneManager.GetActiveScene().name == "mazeScene")
-        {
-            transform.GetChild(1).GetChild(0).GetChild(2).GetChild(0).GetChild(0).GetChild(2).gameObject.SetActive(false);
-            // get animation in blend tree
-            
-        }
-
     }
 
     private void FixedUpdate()
@@ -109,7 +108,7 @@ public class PlayerController : MonoBehaviour
     public void ChangeMouseSensitivity(float newSensitivity)
     {
         Sensitivity = newSensitivity;
-        if(OnMouseSensitivityChange != null) OnMouseSensitivityChange.Invoke(newSensitivity);
+        if(onMouseSensitivityChange != null) onMouseSensitivityChange.Invoke(newSensitivity);
         PlayerPrefs.SetFloat("MouseSensitivity", newSensitivity);
         //save mouse sensitivity in PlayerPrefs with other settings
     }
@@ -151,7 +150,7 @@ public class PlayerController : MonoBehaviour
 
         _xRotation -= Mouse_Y * Sensitivity * Time.smoothDeltaTime;
         _xRotation = Mathf.Clamp(_xRotation, UpperLimit, Bottomlimit);
-
+        CameraRoot.localRotation = Quaternion.Euler(_xRotation, 0, 0);
         Camera.localRotation = Quaternion.Euler(_xRotation, 0, 0);
         _playerRigidbody.MoveRotation((_playerRigidbody.rotation.normalized) *
                                       Quaternion.Euler(0, Mouse_X * Sensitivity * Time.smoothDeltaTime, 0));

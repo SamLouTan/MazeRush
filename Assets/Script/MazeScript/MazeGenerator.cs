@@ -26,22 +26,29 @@ public class MazeGenerator : MonoBehaviour
 
     private AudioSource audioSource;
     private Random _random;
-
+    public int Difficulty { get; private set; }
+    
     public int MazeSeed { get; private set; } = 0;
 
-    public bool[,] CoinNotOnCell { get; set; }
+    public bool[,] CoinNotOnCell { get; private set; }
 
     private void Awake()
     {
+     
         MazeSeed = (int)DateTime.Now.Ticks;
-        CoinNotOnCell = new bool[_mazeWidth, _mazeDepth];
+        
         MazeData mazeData = SaveManager.LoadMaze();
+        Difficulty = PlayerPrefs.GetInt("Difficulty") != 0 ? PlayerPrefs.GetInt("Difficulty") : 1;
+        _mazeDepth *=Difficulty;
+        _mazeWidth *=Difficulty;
+        CoinNotOnCell = new bool[_mazeWidth, _mazeDepth];
         if (mazeData != null)
         {
             MazeSeed = mazeData.MazeSeed;
             _mazeWidth = mazeData.MazeWidth;
             _mazeDepth = mazeData.MazeDepth;
             CoinNotOnCell = mazeData.CoinNotOnCell;
+            Difficulty = mazeData.Difficulty;
         }
     }
 
@@ -50,12 +57,12 @@ public class MazeGenerator : MonoBehaviour
         _random = new Random(MazeSeed);
         audioSource = this.AddComponent<AudioSource>();
         MazeInit();
-        //print maze seed
         Debug.Log($"Maze Seed: {MazeSeed}");
     }
 
     private void MazeInit()
     {
+        Debug.Log(_mazeDepth);
         _mazeGrid = new MazeCell[_mazeWidth, _mazeDepth];
 
         for (int x = 0; x < _mazeWidth; x++)
