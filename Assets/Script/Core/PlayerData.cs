@@ -21,7 +21,8 @@ public class PlayerData
     public float[] Position { get; private set; } = new float[3];// store position as a float array
     public float[] Rotation { get; private set; } = new float[3];// store rotation as a float array
     public float[] Scale { get; private set; } = new float[3];// store scale as a float array
-    
+
+    public float Timer {get; private set;}
   
     public PlayerData(Player player)
     {
@@ -46,5 +47,6 @@ public class PlayerData
         Scale[0] = playerScale.x;
         Scale[1] = playerScale.y;
         Scale[2] = playerScale.z;
+        Timer = player.Timer;
     }
 }

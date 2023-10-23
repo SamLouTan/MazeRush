@@ -1,44 +1,80 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem.HID;
+using UnityEngine.SceneManagement;
+using Button = UnityEngine.UI.Button;
+
 
 public class Player : MonoBehaviour
 {
+    
+    
     // Start is called before the first frame update
-    public int CurrentRoom { get;  set; }// Current level is the level that the player is currently playing
-    public int CurrentGold { get; private set; }// Current gold is the gold that the player currently has in the game actually not implemented yet
-   
-    public Transform PlayerTransform { get; private set; }
-    
-    public int RemainingBullets { get; private set; }// 0 = no bullets, 1 = 1 bullet, 2 = 2 bullets, etc.
-    public int Checkpoint { get; private set; } // 0 = no checkpoint, 1 = checkpoint 1, 2 = checkpoint 2, etc.
-    public Vector3 CheckpointPosition { get; private set; }// store checkpoint position as a float array
-    public int Difficulty { get; private set; } // 0 = easy, 1 = normal, 2 = hard, etc.
-    public int[] UnlockedLevels { get; private set; } // 0 = locked, 1 = unlocked
-    
-    [SerializeField]
-    private PlayerController playerController;
-    
-    private PlayerData playerData { get; set; }
-    
-    void Start()
+    public int CurrentRoom { get; set; } // Current level is the level that the player is currently playing
+
+    public int
+        CurrentGold
     {
+        get;
+        private set;
+    } // Current gold is the gold that the player currently has in the game actually not implemented yet
+
+    public Transform PlayerTransform { get; private set; }
+
+    public int RemainingBullets { get; private set; } // 0 = no bullets, 1 = 1 bullet, 2 = 2 bullets, etc.
+    public int Checkpoint { get; private set; } // 0 = no checkpoint, 1 = checkpoint 1, 2 = checkpoint 2, etc.
+    public Vector3 CheckpointPosition { get; private set; } // store checkpoint position as a float array
+    public int Difficulty { get; private set; } // 1= easy, 2 = normal, 3 = hard, etc.
+    public int[] UnlockedLevels { get; private set; } // 0 = locked, 1 = unlocked
+
+    [SerializeField] private PlayerController playerController;
+
+    [SerializeField] private TextMeshProUGUI goldText;
+    private PlayerData _playerData { get; set; }
+
+    [SerializeField] private TextMeshProUGUI timerText;
+
+    [SerializeField] private GameObject endScreen;
+    private Button _mainMenuButton;
+    public float Timer { get; private set; }
+
+    private void Awake()
+    {
+        Difficulty = PlayerPrefs.GetInt("Difficulty");
+    }
+
+    private void Start()
+    {
+        _mainMenuButton = endScreen.transform.GetChild(2).GetComponent<Button>();
+        _mainMenuButton.interactable = true;
+        _mainMenuButton.onClick.AddListener(() =>
+        {
+            SceneManager.LoadScene(0);
+        });
+        endScreen.SetActive(false);
         playerController = GetComponent<PlayerController>();
         PlayerTransform = playerController.transform;
-        playerData = SaveManager.LoadPlayer();
-        if(playerData != null)
+        _playerData = SaveManager.LoadPlayer();
+        if (_playerData != null)
         {
-            CurrentRoom = playerData.CurrentRoom;
-            CurrentGold = playerData.CurrentGold;
-            RemainingBullets = playerData.RemainingBullets;
-            Checkpoint = playerData.Checkpoint;
-            CheckpointPosition = new Vector3(playerData.CheckpointPosition[0], playerData.CheckpointPosition[1], playerData.CheckpointPosition[2]);
-            Difficulty = playerData.Difficulty;
-            UnlockedLevels = playerData.UnlockedLevels;
-            PlayerTransform.position = new Vector3(playerData.Position[0], playerData.Position[1], playerData.Position[2]);
-            PlayerTransform.rotation = Quaternion.Euler(new Vector3(playerData.Rotation[0], playerData.Rotation[1], playerData.Rotation[2]));
-            PlayerTransform.localScale = new Vector3(playerData.Scale[0], playerData.Scale[1], playerData.Scale[2]);
+            CurrentRoom = _playerData.CurrentRoom;
+            CurrentGold = _playerData.CurrentGold;
+            if (goldText != null) goldText.text = CurrentGold.ToString();
+            RemainingBullets = _playerData.RemainingBullets;
+            Checkpoint = _playerData.Checkpoint;
+            CheckpointPosition = new Vector3(_playerData.CheckpointPosition[0], _playerData.CheckpointPosition[1],
+                _playerData.CheckpointPosition[2]);
+            Difficulty = _playerData.Difficulty;
+            UnlockedLevels = _playerData.UnlockedLevels;
+            PlayerTransform.position =
+                new Vector3(_playerData.Position[0], _playerData.Position[1], _playerData.Position[2]);
+            PlayerTransform.rotation =
+                Quaternion.Euler(new Vector3(_playerData.Rotation[0], _playerData.Rotation[1],
+                    _playerData.Rotation[2]));
+            PlayerTransform.localScale = new Vector3(_playerData.Scale[0], _playerData.Scale[1], _playerData.Scale[2]);
+            Timer = _playerData.Timer;
         }
         else
         {
@@ -49,28 +85,65 @@ public class Player : MonoBehaviour
             Difficulty = 0;
             UnlockedLevels = new int[3];
             PlayerTransform.position = PlayerTransform.position;
-            PlayerTransform.rotation =PlayerTransform.rotation;
+            PlayerTransform.rotation = PlayerTransform.rotation;
             PlayerTransform.localScale = PlayerTransform.localScale;
+            Timer = 0.0f;
         }
-    }   
+    }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        Timer += Time.deltaTime;
+        UpdateTimerDisplay();
+    }
+
+    private void UpdateTimerDisplay()
+    {
+        int hours = Mathf.FloorToInt(Timer / 3600);
+        int minutes = Mathf.FloorToInt(Timer / 60);
+        int seconds = Mathf.FloorToInt(Timer % 60);
+
+        timerText.text = String.Format("{0:00}:{1:00}:{2:00}", hours, minutes, seconds);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Coin"))
+        if (other.CompareTag("Coin"))
         {
             CurrentGold++;
+            /* getting cell position and to know on position */
             GameObject cell = other.transform.parent.gameObject.transform.parent.gameObject.transform.parent.gameObject;
             MazeGenerator parent = cell.GetComponentInParent<MazeGenerator>();
             Vector2 cellPosition = parent.GetCellPosition(cell);
-            parent.CoinNotOnCell[(int)cellPosition.x, (int)cellPosition.y] = true; 
+            parent.CoinNotOnCell[(int)cellPosition.x, (int)cellPosition.y] = true;
             Destroy(other.gameObject);
-            Debug.Log(CurrentGold);
+            goldText.text = CurrentGold.ToString();
+        }
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.CompareTag("Finish"))
+        {         
+            InputManager inputManager = GetComponent<InputManager>();
+            if(inputManager != null) inputManager.OnLevelEnding(true);
+            // stop timer,  show end screen with timer and gold 
+            Time.timeScale = 0;
+            timerText.gameObject.SetActive(false);
+            goldText.transform.parent.gameObject.SetActive(false);
+            endScreen.SetActive(true);
+            TextMeshProUGUI endTimerText = endScreen.transform.GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>();
+            endTimerText.text = timerText.text;
+            TextMeshProUGUI endGoldText = endScreen.transform.GetChild(1).GetChild(1).GetComponent<TextMeshProUGUI>();
+            endGoldText.text = goldText.text;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            Time.timeScale = 1;
+
+            // save player data
+            SaveManager.SavePlayer(this);
+            // load end screen
         }
     }
 }

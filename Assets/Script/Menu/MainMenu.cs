@@ -3,20 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
+using Button = UnityEngine.UI.Button;
+using Cursor = UnityEngine.Cursor;
+
 public class MainMenu : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject _mainMenu;
-    [SerializeField]
-    private GameObject _subMainMenu;
-    [SerializeField]
-    private GameObject _subSettingsMenu;
-    [SerializeField] 
-    private GameObject _loadingScreen;
-    [SerializeField] 
-    private GameObject _levelSelector;
-    
+    [SerializeField] private GameObject _mainMenu;
+    [SerializeField] private GameObject _subMainMenu;
+    [SerializeField] private GameObject _subSettingsMenu;
+    [SerializeField] private GameObject _loadingScreen;
+    [SerializeField] private GameObject _levelSelector;
+
     [SerializeField] private AsyncLoaderManager _asyncLoaderManager;
+
     private void Awake()
     {
         Cursor.visible = true;
@@ -25,7 +25,6 @@ public class MainMenu : MonoBehaviour
         _subSettingsMenu.SetActive(false);
         _loadingScreen.SetActive(false);
         _levelSelector.SetActive(false);
-
     }
 
     public void StartGame()
@@ -43,12 +42,23 @@ public class MainMenu : MonoBehaviour
         _levelSelector.SetActive(false);
         _mainMenu.SetActive(true);
     }
+
     public void PlayGame()
     {
         //display sub menu ui 
-       _subMainMenu.SetActive(true);
-       _levelSelector.SetActive(false);
-       _mainMenu.SetActive(false);
+        _subMainMenu.SetActive(true);
+        _levelSelector.SetActive(false);
+        _mainMenu.SetActive(false);
+        Debug.Log(_subMainMenu.transform.GetChild(0).gameObject.name);
+        Button continueButton = _subMainMenu.transform.GetChild(0).GetComponent<Button>();
+        if (SaveManager.IsSaveExist())
+        {
+            continueButton.interactable = true;
+        }
+        else
+        {
+            continueButton.interactable = false;
+        }
     }
 
     public void Settings()
@@ -59,7 +69,6 @@ public class MainMenu : MonoBehaviour
         _subMainMenu.SetActive(false);
         _mainMenu.SetActive(false);
         _levelSelector.SetActive(false);
-        
     }
 
     public void LevelSelector()
@@ -69,12 +78,34 @@ public class MainMenu : MonoBehaviour
         _mainMenu.SetActive(false);
         _levelSelector.SetActive(true);
     }
+
+    public void SetLevelEasy()
+    {
+        //Set difficulty to easy
+        PlayerPrefs.SetInt("Difficulty", 1);
+        PlayerPrefs.Save();
+        StartGame();
+    }
+
+    public void SetLevelNormal()
+    {
+        //Set difficulty to normal
+        PlayerPrefs.SetInt("Difficulty", 2);
+        PlayerPrefs.Save();
+        StartGame();
+    }
+
+    public void SetLevelHard()
+    {
+        PlayerPrefs.SetInt("Difficulty", 3);
+        PlayerPrefs.Save();
+        StartGame();
+    }
+
+
     public void QuitGame()
     {
         Debug.Log("Quit");
         Application.Quit(1);
     }
-    
-    
 }
-    

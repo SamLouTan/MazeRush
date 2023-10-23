@@ -4,11 +4,14 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
 
 public class InputManager : MonoBehaviour
 {
+    
+    public class HandleLevelEnding : UnityEvent<bool> { }
     [SerializeField] private PlayerInput PlayerInput;
 
     // read-only Variable pour savoir le status des inputs
@@ -21,7 +24,7 @@ public class InputManager : MonoBehaviour
 
     public bool Fire { get; private set; }
 
-
+    private HandleLevelEnding _onLevelEnding;
     //Acces a la Current InputActionMap et aux InputAction Individuellement
     private InputActionMap _currentMap;
     private InputActionMap _menuMap;
@@ -38,7 +41,7 @@ public class InputManager : MonoBehaviour
 
     //Obtention de la InputMap et attache au inputAction
     private bool _isInMenu = false;
-
+    private bool _isEndOfLevel = false;
     private void Awake()
     {
         Hidecursor();
@@ -95,6 +98,17 @@ public class InputManager : MonoBehaviour
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+    }
+    
+    public void OnLevelEnding(bool isEndOfLevel)
+    {
+        _isEndOfLevel = isEndOfLevel;
+        if (_onLevelEnding != null)
+        {
+            _onLevelEnding.Invoke(isEndOfLevel);
+            
+        } 
+        _currentMap.Disable();
     }
     private void Update()
     {

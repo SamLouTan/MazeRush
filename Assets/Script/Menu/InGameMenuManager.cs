@@ -43,7 +43,9 @@ public class InGameMenuManager : MonoBehaviour
             inGameMenu.transform.GetChild(0).GetChild(1).gameObject.SetActive(true);
             controls = inGameMenu.transform.GetChild(0).GetChild(1).GetChild(0).gameObject;
             _slider = controls.transform.GetChild(8).GetComponent<Slider>();
-
+            _slider.value = PlayerPrefs.GetFloat("MouseSensitivity");
+            _slider.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text =
+                System.MathF.Round(_slider.value, 2).ToString("F2");
 
             _slider.onValueChanged
                 .AddListener(OnSensitivityChange); // add listener to slider to change mouse sensitivity
@@ -53,6 +55,7 @@ public class InGameMenuManager : MonoBehaviour
                 controls.transform.parent.gameObject.SetActive(false);
                 pauseMenu.gameObject.SetActive(true);
                 _isInSettings = false;
+                PlayerPrefs.Save();
             });
         });
         mainMenu = pauseMenu.transform.GetChild(3).gameObject;
@@ -65,9 +68,8 @@ public class InGameMenuManager : MonoBehaviour
         });
     }
 
-    public void OnSensitivityChange(float value)
+    private void OnSensitivityChange(float value)
     {
-        Debug.Log(value);
         _slider.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text =
             System.MathF.Round(value, 2).ToString("F2");
         _player.GetComponent<PlayerController>().ChangeMouseSensitivity(value);
