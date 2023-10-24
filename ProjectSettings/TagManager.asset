@@ -10,6 +10,7 @@ TagManager:
   - ButtonExit
   - Coin
   - Ground
+  - PlayerFPS
   layers:
   - Default
   - TransparentFX
