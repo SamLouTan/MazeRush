@@ -19,12 +19,13 @@ public class InstanciatePlayer : MonoBehaviour
             {
                 Vector3 centerPosition = startFloorCenter + boxCollider.center;
                 Instantiate(playerPrefab, centerPosition, Quaternion.identity);
-                //Instantiate(playerPrefab, new Vector3(1, 8, 15), Quaternion.identity); 
+                //Instantiate(playerPrefab, new Vector3(19, 18, 15), Quaternion.identity); 
                 // pour debug 
             }
             else
             {
                 Instantiate(playerPrefab, startFloorCenter, Quaternion.identity);
+                //Instantiate(playerPrefab, new Vector3(19, 18, 15), Quaternion.identity); 
             }
         }
         else
