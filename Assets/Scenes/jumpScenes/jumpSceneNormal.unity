@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.4465782, g: 0.49641252, b: 0.5748167, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -259,7 +259,7 @@ PrefabInstance:
     - target: {fileID: 7811888943788350295, guid: d8b60d6594086f04e9244b46b26afa8b, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 19f1db7e8dafd8943b50360d722468d0, type: 2}
+      objectReference: {fileID: 2100000, guid: be04b169c743586469b8eb72613a65e4, type: 2}
     - target: {fileID: 7811888943790250423, guid: d8b60d6594086f04e9244b46b26afa8b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 8.42
@@ -437,7 +437,7 @@ PrefabInstance:
     - target: {fileID: 7811888943788350295, guid: d8b60d6594086f04e9244b46b26afa8b, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 19f1db7e8dafd8943b50360d722468d0, type: 2}
+      objectReference: {fileID: 2100000, guid: be04b169c743586469b8eb72613a65e4, type: 2}
     - target: {fileID: 7811888943790250423, guid: d8b60d6594086f04e9244b46b26afa8b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 31
@@ -631,7 +631,7 @@ PrefabInstance:
     - target: {fileID: 2300000, guid: bef96b6e1cd37444fa6937ae99361014, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 4930c6ffa5b9b9f4098249a43abf8506, type: 2}
+      objectReference: {fileID: 2100000, guid: 34055783d0b914645bc6fbf137b78aff, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -725,7 +725,7 @@ PrefabInstance:
     - target: {fileID: 2300000, guid: b0391de1f01e7c3498a2b52e8c634d06, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 6968e89851431104b8f931c37d69356b, type: 2}
+      objectReference: {fileID: 2100000, guid: dbfd0248a3421084b9b045a188459a53, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -937,7 +937,7 @@ PrefabInstance:
     - target: {fileID: 2300000, guid: bef96b6e1cd37444fa6937ae99361014, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 6968e89851431104b8f931c37d69356b, type: 2}
+      objectReference: {fileID: 2100000, guid: fa2bc433faadcfc4cb601a9388a5bea2, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -989,7 +989,7 @@ PrefabInstance:
     - target: {fileID: 7811888943788350295, guid: d8b60d6594086f04e9244b46b26afa8b, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 19f1db7e8dafd8943b50360d722468d0, type: 2}
+      objectReference: {fileID: 2100000, guid: be04b169c743586469b8eb72613a65e4, type: 2}
     - target: {fileID: 7811888943790250423, guid: d8b60d6594086f04e9244b46b26afa8b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.98
@@ -1401,7 +1401,7 @@ PrefabInstance:
     - target: {fileID: 2300000, guid: b0391de1f01e7c3498a2b52e8c634d06, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 6968e89851431104b8f931c37d69356b, type: 2}
+      objectReference: {fileID: 2100000, guid: dbfd0248a3421084b9b045a188459a53, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1421,7 +1421,7 @@ PrefabInstance:
     - target: {fileID: 7811888943788350295, guid: d8b60d6594086f04e9244b46b26afa8b, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 19f1db7e8dafd8943b50360d722468d0, type: 2}
+      objectReference: {fileID: 2100000, guid: be04b169c743586469b8eb72613a65e4, type: 2}
     - target: {fileID: 7811888943790250423, guid: d8b60d6594086f04e9244b46b26afa8b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 28.04
@@ -1956,7 +1956,7 @@ PrefabInstance:
     - target: {fileID: 2300000, guid: b0391de1f01e7c3498a2b52e8c634d06, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 6968e89851431104b8f931c37d69356b, type: 2}
+      objectReference: {fileID: 2100000, guid: dbfd0248a3421084b9b045a188459a53, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2189,7 +2189,7 @@ PrefabInstance:
     - target: {fileID: 7811888943788350295, guid: d8b60d6594086f04e9244b46b26afa8b, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 19f1db7e8dafd8943b50360d722468d0, type: 2}
+      objectReference: {fileID: 2100000, guid: be04b169c743586469b8eb72613a65e4, type: 2}
     - target: {fileID: 7811888943790250423, guid: d8b60d6594086f04e9244b46b26afa8b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 13.02
@@ -2653,7 +2653,7 @@ PrefabInstance:
     - target: {fileID: 2300000, guid: b0391de1f01e7c3498a2b52e8c634d06, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 6968e89851431104b8f931c37d69356b, type: 2}
+      objectReference: {fileID: 2100000, guid: dbfd0248a3421084b9b045a188459a53, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2740,7 +2740,7 @@ PrefabInstance:
     - target: {fileID: 7811888943788350295, guid: d8b60d6594086f04e9244b46b26afa8b, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 19f1db7e8dafd8943b50360d722468d0, type: 2}
+      objectReference: {fileID: 2100000, guid: be04b169c743586469b8eb72613a65e4, type: 2}
     - target: {fileID: 7811888943790250423, guid: d8b60d6594086f04e9244b46b26afa8b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 11.49
