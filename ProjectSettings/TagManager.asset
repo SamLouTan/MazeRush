@@ -10,7 +10,8 @@ TagManager:
   - ButtonExit
   - Coin
   - Ground
-  - PlayerFPS
+  - Bullet
+  - Enemy
   layers:
   - Default
   - TransparentFX

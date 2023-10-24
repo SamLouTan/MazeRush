@@ -20,7 +20,7 @@ public class PlayerControllerFPS : MonoBehaviour
     private InputManager _inputManager;
     [SerializeField] private Transform bulletSpawnPoint;
     [SerializeField] private GameObject bulletPrefab;
-    [SerializeField] private float bulletSpeed = 1000f;
+    [SerializeField] private float bulletSpeed = 100f;
 
     //Acces aux HashID de Xvelocity et Yvelocity
     //Acces aux Animations
@@ -57,6 +57,7 @@ public class PlayerControllerFPS : MonoBehaviour
     private void FixedUpdate()
     {
         Move();
+        HandleFire();
     }
 
     private void LateUpdate()
@@ -95,4 +96,57 @@ public class PlayerControllerFPS : MonoBehaviour
                                       Quaternion.Euler(0, Mouse_X * Sensitivity * Time.smoothDeltaTime, 0));
     }
 
+    private void HandleFire()
+    {
+        if (_inputManager.Fire)
+        {
+            if (!isFireBeingHeld)
+            {
+                isFireBeingHeld = true;
+                Shoot();
+            }
+        }
+        else
+            isFireBeingHeld = false;
+    }
+    
+    private void Shoot()
+    { 
+        Transform cameratransform = Camera.transform;
+        // Define a ray starting from the camera position and going forward
+        Ray ray = new Ray(cameratransform.position, cameratransform.forward);
+
+        // Create a RaycastHit variable to store information about what the ray hits
+        RaycastHit hit;
+        // rotate Bulletspwanpoint to camera rotation
+        bulletSpawnPoint.rotation = Camera.rotation;
+        Vector3 bulletSpawnPointPosition = bulletSpawnPoint.position;
+    
+        // Check if the ray hits something
+        if (Physics.Raycast(ray, out hit))
+        {
+            // Get the point where the ray hit
+            Vector3 targetPoint = hit.point;
+
+            // Calculate the direction from bulletSpawnPoint to the target point
+            Vector3 direction = (targetPoint - bulletSpawnPoint.position).normalized;
+
+            // Instantiate the bullet
+            GameObject bullet = Instantiate(bulletPrefab,bulletSpawnPointPosition, Quaternion.identity);
+            bullet.transform.localRotation = Quaternion.LookRotation(Camera.right); 
+            // Set the velocity of the bullet to be in the calculated direction
+            bullet.GetComponent<Rigidbody>().velocity = direction * bulletSpeed;
+        }
+        else
+        {
+            Vector3 targetPoint = cameratransform.position + cameratransform.forward * 1000f;
+            Vector3 direction = (targetPoint - bulletSpawnPoint.position).normalized;
+
+            // Instantiate the bullet
+            GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPointPosition, Quaternion.identity);
+            bullet.transform.localRotation = Quaternion.LookRotation(Camera.right); 
+            // Set the velocity of the bullet to be in the calculated direction
+            bullet.GetComponent<Rigidbody>().velocity = direction * bulletSpeed;
+        }
+    }
 }
