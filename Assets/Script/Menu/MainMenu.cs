@@ -43,6 +43,15 @@ public class MainMenu : MonoBehaviour
         _mainMenu.SetActive(true);
     }
 
+    public void ContinueGame()
+    {
+        _subMainMenu.SetActive(false);
+        _levelSelector.SetActive(false);
+        _loadingScreen.SetActive(true);
+        int room = SaveManager.LoadPlayer().CurrentRoom-1;
+        Debug.Log("Room: "+room);
+        _asyncLoaderManager.LoadScene(CONSTANTS.SCENE_TO_LOAD[PlayerPrefs.GetInt("Difficulty") - 1,room]);
+    }
     public void PlayGame()
     {
         //display sub menu ui 

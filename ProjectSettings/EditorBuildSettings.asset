@@ -9,8 +9,17 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 072007830d029ef4c8264d7a90ce4d4a
   - enabled: 1
+    path: Assets/Scenes/jumpScenes/jumpSceneEasy.unity
+    guid: 2dd0d9bb06ce3d146b9cc0c5b237b4db
+  - enabled: 1
     path: Assets/Scenes/mazeScene.unity
     guid: bed764f0227c4a94aaadc509143a27c7
+  - enabled: 1
+    path: Assets/Scenes/jumpScenes/jumpSceneNormal.unity
+    guid: b7340103dd0192446ab54709c9ad528c
+  - enabled: 1
+    path: Assets/Scenes/jumpScenes/jumpSceneHard.unity
+    guid: aeeb4697891d23b40ad8a8e567e96dd0
   m_configObjects:
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 0138288b686791f4a90a597f75dae9e6, type: 2}
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: 3803ffde5dd19fd45938df74ce53de79, type: 2}

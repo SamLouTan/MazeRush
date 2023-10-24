@@ -16,6 +16,8 @@ public class MazeData
         MazeDepth = mazeGenerator.MazeDepth;
         MazeSeed = mazeGenerator.MazeSeed;
         Difficulty = mazeGenerator.Difficulty;
+  
+        
     }
  
     

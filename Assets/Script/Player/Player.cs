@@ -9,8 +9,6 @@ using Button = UnityEngine.UI.Button;
 
 public class Player : MonoBehaviour
 {
-    
-    
     // Start is called before the first frame update
     public int CurrentRoom { get; set; } // Current level is the level that the player is currently playing
 
@@ -27,7 +25,7 @@ public class Player : MonoBehaviour
     public int Checkpoint { get; private set; } // 0 = no checkpoint, 1 = checkpoint 1, 2 = checkpoint 2, etc.
     public Vector3 CheckpointPosition { get; private set; } // store checkpoint position as a float array
     public int Difficulty { get; private set; } // 1= easy, 2 = normal, 3 = hard, etc.
-    public int[] UnlockedLevels { get; private set; } // 0 = locked, 1 = unlocked
+    public int[,] UnlockedLevels { get; private set; } // 0 = locked, 1 = unlocked
 
     [SerializeField] private PlayerController playerController;
 
@@ -38,6 +36,7 @@ public class Player : MonoBehaviour
 
     [SerializeField] private GameObject endScreen;
     private Button _mainMenuButton;
+    private Button _nextLevelButton; // button to go to next level
     public float Timer { get; private set; }
 
     private void Awake()
@@ -49,32 +48,45 @@ public class Player : MonoBehaviour
     {
         _mainMenuButton = endScreen.transform.GetChild(2).GetComponent<Button>();
         _mainMenuButton.interactable = true;
-        _mainMenuButton.onClick.AddListener(() =>
+        _mainMenuButton.onClick.AddListener(() => { SceneManager.LoadScene(0); });
+
+        if (CurrentRoom != 3)
         {
-            SceneManager.LoadScene(0);
-        });
-        endScreen.SetActive(false);
+            _nextLevelButton = endScreen.transform.GetChild(3).GetComponent<Button>();
+            _nextLevelButton.interactable = true;
+            _nextLevelButton.onClick.AddListener(() =>
+            {
+                InputManager inputManager = GetComponent<InputManager>();
+                if (inputManager != null) inputManager.OnLevelEnding(false);
+                // save player data
+                SceneManager.LoadScene(CONSTANTS.SCENE_TO_LOAD[Difficulty - 1, CurrentRoom]);
+            });
+        }
+
+
         playerController = GetComponent<PlayerController>();
         PlayerTransform = playerController.transform;
         _playerData = SaveManager.LoadPlayer();
         if (_playerData != null)
         {
-            CurrentRoom = _playerData.CurrentRoom;
-            CurrentGold = _playerData.CurrentGold;
-            if (goldText != null) goldText.text = CurrentGold.ToString();
-            RemainingBullets = _playerData.RemainingBullets;
-            Checkpoint = _playerData.Checkpoint;
-            CheckpointPosition = new Vector3(_playerData.CheckpointPosition[0], _playerData.CheckpointPosition[1],
-                _playerData.CheckpointPosition[2]);
-            Difficulty = _playerData.Difficulty;
-            UnlockedLevels = _playerData.UnlockedLevels;
-            PlayerTransform.position =
-                new Vector3(_playerData.Position[0], _playerData.Position[1], _playerData.Position[2]);
-            PlayerTransform.rotation =
-                Quaternion.Euler(new Vector3(_playerData.Rotation[0], _playerData.Rotation[1],
-                    _playerData.Rotation[2]));
-            PlayerTransform.localScale = new Vector3(_playerData.Scale[0], _playerData.Scale[1], _playerData.Scale[2]);
-            Timer = _playerData.Timer;
+            if (_playerData.CurrentRoom == 3)
+            {
+                CurrentRoom = _playerData.CurrentRoom;
+                CurrentGold = _playerData.CurrentGold;
+                if (goldText != null) goldText.text = CurrentGold.ToString();
+                RemainingBullets = _playerData.RemainingBullets;
+                Checkpoint = _playerData.Checkpoint;
+                CheckpointPosition = new Vector3(_playerData.CheckpointPosition[0], _playerData.CheckpointPosition[1],
+                    _playerData.CheckpointPosition[2]);
+                Difficulty = _playerData.Difficulty;
+                UnlockedLevels = _playerData.UnlockedLevels;
+                PlayerTransform.position =
+                    new Vector3(_playerData.Position[0], _playerData.Position[1], _playerData.Position[2]);
+                PlayerTransform.rotation =
+                    Quaternion.Euler(new Vector3(_playerData.Rotation[0], _playerData.Rotation[1],
+                        _playerData.Rotation[2]));
+                Timer = _playerData.Timer;
+            }
         }
         else
         {
@@ -82,13 +94,15 @@ public class Player : MonoBehaviour
             RemainingBullets = 0;
             Checkpoint = 0;
             CheckpointPosition = new Vector3(0, 0, 0);
-            Difficulty = 0;
-            UnlockedLevels = new int[3];
+            Difficulty = PlayerPrefs.GetInt("Difficulty") != 0 ? PlayerPrefs.GetInt("Difficulty") : 1;
+            UnlockedLevels = new int[3, 3];
             PlayerTransform.position = PlayerTransform.position;
             PlayerTransform.rotation = PlayerTransform.rotation;
             PlayerTransform.localScale = PlayerTransform.localScale;
             Timer = 0.0f;
         }
+
+        endScreen.SetActive(false);
     }
 
     // Update is called once per frame
@@ -125,9 +139,9 @@ public class Player : MonoBehaviour
     private void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.CompareTag("Finish"))
-        {         
+        {
             InputManager inputManager = GetComponent<InputManager>();
-            if(inputManager != null) inputManager.OnLevelEnding(true);
+            if (inputManager != null) inputManager.OnLevelEnding(true);
             // stop timer,  show end screen with timer and gold 
             Time.timeScale = 0;
             timerText.gameObject.SetActive(false);
@@ -135,8 +149,9 @@ public class Player : MonoBehaviour
             endScreen.SetActive(true);
             TextMeshProUGUI endTimerText = endScreen.transform.GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>();
             endTimerText.text = timerText.text;
-            if (this.CurrentRoom == 3)
+            if (CurrentRoom == 3)
             {
+                Debug.Log("Current Room: 3");
                 TextMeshProUGUI endGoldText =
                     endScreen.transform.GetChild(1).GetChild(1).GetComponent<TextMeshProUGUI>();
                 endGoldText.text = goldText.text;
@@ -145,10 +160,11 @@ public class Player : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             Time.timeScale = 1;
-            // save player data
             SaveManager.SavePlayer(this);
-            SaveManager.SaveMaze(FindObjectOfType<MazeGenerator>());
-            // load end screen
+            if (CurrentRoom == 3)
+            {
+                SaveManager.SaveMaze(FindObjectOfType<MazeGenerator>());
+            }
         }
     }
 }

@@ -1754,7 +1754,7 @@ Camera:
   m_GameObject: {fileID: 4491740225362735180}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 4
+  m_ClearFlags: 1
   m_BackGroundColor: {r: 0.31847632, g: 0.32669988, b: 0.33962262, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -1777,7 +1777,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.01
-  far clip plane: 10
+  far clip plane: 13
   field of view: 50.49926
   orthographic: 0
   orthographic size: 5
@@ -2902,6 +2902,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7532284149238893204}
     m_Modifications:
+    - target: {fileID: 49937771409258386, guid: 8ff73460126ff414c943293e61dabd7e, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 49937771409258386, guid: 8ff73460126ff414c943293e61dabd7e, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 1924770449848572388, guid: 8ff73460126ff414c943293e61dabd7e, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.03
@@ -2954,13 +2962,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2034682401010052341, guid: 8ff73460126ff414c943293e61dabd7e, type: 3}
+      propertyPath: m_fontSize
+      value: 26.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2042979682293005972, guid: 8ff73460126ff414c943293e61dabd7e, type: 3}
       propertyPath: m_Name
       value: PlayerUIMaze
       objectReference: {fileID: 0}
     - target: {fileID: 2489126848468149733, guid: 8ff73460126ff414c943293e61dabd7e, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5362443048762912715, guid: 8ff73460126ff414c943293e61dabd7e, type: 3}
       propertyPath: m_Navigation.m_Mode
@@ -2977,6 +2989,38 @@ PrefabInstance:
     - target: {fileID: 5362443048762912715, guid: 8ff73460126ff414c943293e61dabd7e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5593786698153516075, guid: 8ff73460126ff414c943293e61dabd7e, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5593786698153516075, guid: 8ff73460126ff414c943293e61dabd7e, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5593786698153516075, guid: 8ff73460126ff414c943293e61dabd7e, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5593786698153516075, guid: 8ff73460126ff414c943293e61dabd7e, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 57.81
+      objectReference: {fileID: 0}
+    - target: {fileID: 5593786698153516075, guid: 8ff73460126ff414c943293e61dabd7e, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 27.0015
+      objectReference: {fileID: 0}
+    - target: {fileID: 5593786698153516075, guid: 8ff73460126ff414c943293e61dabd7e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.0000000030989
+      objectReference: {fileID: 0}
+    - target: {fileID: 5593786698153516075, guid: 8ff73460126ff414c943293e61dabd7e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -124.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5593786698153516075, guid: 8ff73460126ff414c943293e61dabd7e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6656728649079870038, guid: 8ff73460126ff414c943293e61dabd7e, type: 3}
       propertyPath: m_UseSpriteMesh

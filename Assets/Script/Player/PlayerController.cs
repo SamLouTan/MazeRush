@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
     private int _fallingHash;
     private int _crouchHash;
     private int _fireHash;
-
+    public bool Grounded => _grounded;
     private Animator _animator;
     //Acces aux HashID de Xvelocity et Yvelocity
     //Acces aux Animations

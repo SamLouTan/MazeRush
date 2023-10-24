@@ -12,6 +12,7 @@ public class InputManager : MonoBehaviour
 {
     
     public class HandleLevelEnding : UnityEvent<bool> { }
+   
     [SerializeField] private PlayerInput PlayerInput;
 
     // read-only Variable pour savoir le status des inputs
@@ -120,7 +121,19 @@ public class InputManager : MonoBehaviour
             Hidecursor();
             Time.timeScale = 1;
         }
+        
+            if (!GetComponent<PlayerController>().Grounded)
+            {
+                _runAction.Disable();
+            }
+            else
+            {
+                _runAction.Enable();
+            }
+ 
     }
+
+
 
     private void OnDisplayMenu(InputAction.CallbackContext context)
     {

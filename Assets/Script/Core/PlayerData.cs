@@ -15,7 +15,7 @@ public class PlayerData
     public int Checkpoint { get; private set; } // 0 = no checkpoint, 1 = checkpoint 1, 2 = checkpoint 2, etc.
     public float[] CheckpointPosition { get; private set; } = new float[3];// store checkpoint position as a float array
     public int Difficulty { get; private set; } // 0 = easy, 1 = normal, 2 = hard, etc.
-    public int[] UnlockedLevels { get; private set; } // 0 = locked, 1 = unlocked
+    public int[,] UnlockedLevels { get; private set; } // 0 = locked, 1 = unlocked
     
     //Transform
     public float[] Position { get; private set; } = new float[3];// store position as a float array

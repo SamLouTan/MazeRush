@@ -1096,6 +1096,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: endFloor
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 65ebb9950643af640a5070a9367992d1, type: 3}
+      propertyPath: m_TagString
+      value: Finish
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 65ebb9950643af640a5070a9367992d1, type: 3}
       propertyPath: m_LocalScale.x
       value: 3

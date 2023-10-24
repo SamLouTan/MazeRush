@@ -124,13 +124,9 @@ public class MazeGenerator : MonoBehaviour
             }
         } while (nextCell != null);
     }
-
-    private void Update()
-    {
-    }
+    
     IEnumerator PlayRandomSound()
     {   
-        
         while (_audioSource.isPlaying) yield return null;
         float randomNumber = new Random().Next(10, 60);
         yield return new WaitForSeconds(randomNumber);
