@@ -135,8 +135,13 @@ public class Player : MonoBehaviour
             endScreen.SetActive(true);
             TextMeshProUGUI endTimerText = endScreen.transform.GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>();
             endTimerText.text = timerText.text;
-            TextMeshProUGUI endGoldText = endScreen.transform.GetChild(1).GetChild(1).GetComponent<TextMeshProUGUI>();
-            endGoldText.text = goldText.text;
+            if (this.CurrentRoom == 3)
+            {
+                TextMeshProUGUI endGoldText =
+                    endScreen.transform.GetChild(1).GetChild(1).GetComponent<TextMeshProUGUI>();
+                endGoldText.text = goldText.text;
+            }
+
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             Time.timeScale = 1;

@@ -53,8 +53,7 @@ public class PlayerController : MonoBehaviour
     //Player vitesse
     private const float _walkSpeed = 2f;
     private const float _runSpeed = 6f;
-
-    private Vector3 startPosition;
+    
     private Vector2 _currentVelocity;
 
     private void Awake()
@@ -80,7 +79,6 @@ public class PlayerController : MonoBehaviour
         _crouchHash = Animator.StringToHash("Crouch");
         _fireHash = Animator.StringToHash("Fire");
         UnityEngine.Camera.main!.fieldOfView = 90f;
-        startPosition = transform.position;
     }
 
     private void FixedUpdate()
@@ -97,11 +95,11 @@ public class PlayerController : MonoBehaviour
         CamMouvements();
     }
     
-    void OnCollisionStay(Collision collision) // Respawn
+    void OnCollisionEnter(Collision collision) // Respawn
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
-            transform.position = startPosition;
+            transform.position = GetComponentInParent<InstanciatePlayer>().StartPosition;
         }
     }
 

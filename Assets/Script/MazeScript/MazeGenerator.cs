@@ -101,7 +101,7 @@ public class MazeGenerator : MonoBehaviour
         GameObject player = Instantiate(_player, new Vector3(-0.5f, 0.3f, 0.5f), Quaternion.identity);
         player.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
         InGameMenuManager inGameMenuManager = GetComponent<InGameMenuManager>();
-        inGameMenuManager._player = player;
+        inGameMenuManager.player = player;
         player.GetComponent<Player>().CurrentRoom = 3;
         inGameMenuManager.inGameMenu = Instantiate(_inGameMenuPrefab, new Vector3(0, 0, 0), Quaternion.identity);
         inGameMenuManager.inGameMenu.SetActive(true);
