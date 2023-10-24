@@ -140,9 +140,9 @@ public class Player : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             Time.timeScale = 1;
-
             // save player data
             SaveManager.SavePlayer(this);
+            SaveManager.SaveMaze(FindObjectOfType<MazeGenerator>());
             // load end screen
         }
     }

@@ -20,11 +20,20 @@ public class MazeGenerator : MonoBehaviour
 
     [SerializeField] private GameObject _player;
     [SerializeField] private AudioClip[] _jumpscare;
+    [SerializeField] private AudioClip[] _voiceLines;
+    [SerializeField] private AudioSource _ambientSource;
+    
+    
+    
     private MazeCell[,] _mazeGrid;
     public int MazeWidth => _mazeWidth;
     public int MazeDepth => _mazeDepth;
 
-    private AudioSource audioSource;
+    private AudioSource _audioSource;
+    private AudioSource _voiceSource;
+    
+    public AudioSource VoiceSource => _voiceSource;
+    public AudioSource AmbientSource => _ambientSource;
     private Random _random;
     public int Difficulty { get; private set; }
     
@@ -34,7 +43,7 @@ public class MazeGenerator : MonoBehaviour
 
     private void Awake()
     {
-     
+        
         MazeSeed = (int)DateTime.Now.Ticks;
         
         MazeData mazeData = SaveManager.LoadMaze();
@@ -49,15 +58,25 @@ public class MazeGenerator : MonoBehaviour
             _mazeDepth = mazeData.MazeDepth;
             CoinNotOnCell = mazeData.CoinNotOnCell;
             Difficulty = mazeData.Difficulty;
+            _ambientSource.Play();
+        }
+        else
+        {
+            _voiceSource = this.AddComponent<AudioSource>();
+            _voiceSource.spatialize = true;
+            _voiceSource.volume = 0.6f;
+            _voiceSource.clip = _voiceLines[0];
+            _voiceSource.Play();
+            _ambientSource.PlayDelayed(_voiceSource.clip.length);
         }
     }
 
     private void Start()
     {
         _random = new Random(MazeSeed);
-        audioSource = this.AddComponent<AudioSource>();
+        _audioSource = this.AddComponent<AudioSource>();
+     
         MazeInit();
-        Debug.Log($"Maze Seed: {MazeSeed}");
     }
 
     private void MazeInit()
@@ -86,10 +105,9 @@ public class MazeGenerator : MonoBehaviour
         player.GetComponent<Player>().CurrentRoom = 3;
         inGameMenuManager.inGameMenu = Instantiate(_inGameMenuPrefab, new Vector3(0, 0, 0), Quaternion.identity);
         inGameMenuManager.inGameMenu.SetActive(true);
-        
-
         StartCoroutine(PlayRandomSound());
     }
+
 
     private void GenerateMaze(MazeCell previousCell, MazeCell currentCell)
     {
@@ -110,16 +128,16 @@ public class MazeGenerator : MonoBehaviour
     private void Update()
     {
     }
-
     IEnumerator PlayRandomSound()
-    {
-        while (audioSource.isPlaying) yield return null;
+    {   
+        
+        while (_audioSource.isPlaying) yield return null;
         float randomNumber = new Random().Next(10, 60);
         yield return new WaitForSeconds(randomNumber);
-        audioSource.clip = _jumpscare[new Random().Next(1, _jumpscare.Length)];
-        audioSource.spatialize = true;
-        audioSource.volume = 0.3f;
-        audioSource.Play();
+        _audioSource.clip = _jumpscare[new Random().Next(1, _jumpscare.Length)];
+        _audioSource.spatialize = true;
+        _audioSource.volume = 0.3f;
+        _audioSource.Play();
         StartCoroutine(PlayRandomSound());
     }
 

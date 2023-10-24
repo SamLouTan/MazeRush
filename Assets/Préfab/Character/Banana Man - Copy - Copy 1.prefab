@@ -731,7 +731,7 @@ Animator:
   m_GameObject: {fileID: 1724227146957505261}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 81bb9eea30387e442899949a80011e55, type: 3}
-  m_Controller: {fileID: 9100000, guid: c892d3ec67d8c6546884783923371993, type: 2}
+  m_Controller: {fileID: 9100000, guid: 331127898af675a47b96ab5badfabecd, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -834,7 +834,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f37efcb0f7d4494ebe5f40cfd6a154b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnMouseSensitivityChange:
+  onMouseSensitivityChange:
     m_PersistentCalls:
       m_Calls: []
   AnimBlendSpeed: 8.9
@@ -878,7 +878,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerController: {fileID: 1826977757151280582}
+  goldText: {fileID: 0}
   timerText: {fileID: 0}
+  endScreen: {fileID: 0}
 --- !u!1 &1933464124179576265
 GameObject:
   m_ObjectHideFlags: 0

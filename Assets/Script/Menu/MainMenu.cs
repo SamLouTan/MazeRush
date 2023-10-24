@@ -82,6 +82,7 @@ public class MainMenu : MonoBehaviour
     public void SetLevelEasy()
     {
         //Set difficulty to easy
+        SaveManager.DeletePlayerData();
         PlayerPrefs.SetInt("Difficulty", 1);
         PlayerPrefs.Save();
         StartGame();
@@ -89,6 +90,7 @@ public class MainMenu : MonoBehaviour
 
     public void SetLevelNormal()
     {
+        SaveManager.DeletePlayerData();
         //Set difficulty to normal
         PlayerPrefs.SetInt("Difficulty", 2);
         PlayerPrefs.Save();
@@ -97,6 +99,7 @@ public class MainMenu : MonoBehaviour
 
     public void SetLevelHard()
     {
+        SaveManager.DeletePlayerData();
         PlayerPrefs.SetInt("Difficulty", 3);
         PlayerPrefs.Save();
         StartGame();
