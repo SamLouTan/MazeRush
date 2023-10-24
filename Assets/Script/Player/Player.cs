@@ -59,7 +59,7 @@ public class Player : MonoBehaviour
                 InputManager inputManager = GetComponent<InputManager>();
                 if (inputManager != null) inputManager.OnLevelEnding(false);
                 // save player data
-                SceneManager.LoadScene(CONSTANTS.SCENE_TO_LOAD[Difficulty - 1, CurrentRoom]);
+                SceneManager.LoadScene(CONSTANTS.SCENE_TO_LOAD[Difficulty - 1, 1]);
             });
         }
 

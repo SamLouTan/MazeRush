@@ -66,13 +66,13 @@ public class PlayerControllerFPS : MonoBehaviour
     }
     
 
-    public void ChangeMouseSensitivity(float newSensitivity)
+   /* public void ChangeMouseSensitivity(float newSensitivity)
     {
         Sensitivity = newSensitivity;
         //if(onMouseSensitivityChange != null) onMouseSensitivityChange.Invoke(newSensitivity);
         PlayerPrefs.SetFloat("MouseSensitivity", newSensitivity);
         //save mouse sensitivity in PlayerPrefs with other settings
-    }
+    }*/
     private void Move()
     {
         float targetSpeed = _inputManager.Run ? _runSpeed : _walkSpeed;

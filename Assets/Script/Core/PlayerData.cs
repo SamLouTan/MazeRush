@@ -49,4 +49,30 @@ public class PlayerData
         Scale[2] = playerScale.z;
         Timer = player.Timer;
     }
+    public PlayerData(int currentRoom, float timer)
+    {
+         PlayerData _this = SaveManager.LoadPlayer();
+        Timer = timer;
+        CurrentRoom = currentRoom;
+        CurrentGold = _this.CurrentGold;
+        RemainingBullets = _this.RemainingBullets;
+        Checkpoint = _this.Checkpoint;
+        CheckpointPosition[0]= _this.CheckpointPosition[0];
+        CheckpointPosition[1]= _this.CheckpointPosition[1];
+        CheckpointPosition[2]= _this.CheckpointPosition[2];
+        Difficulty = _this.Difficulty;
+        UnlockedLevels = _this.UnlockedLevels;
+        Position[0] = _this.Position[0];
+        Position[1] =  _this.Position[1];
+        Position[2] =  _this.Position[2];
+        Rotation[0] = _this.Rotation[0];
+        Rotation[1] = _this.Rotation[1];
+        Rotation[2] = _this.Rotation[2];
+        Scale[0] =_this.Scale[0];
+        Scale[1] =_this.Scale[1];
+        Scale[2] =_this.Scale[2];
+     
+        
+        
+    }
 }

@@ -18,7 +18,18 @@ public static class SaveManager
         formatter.Serialize(stream, playerData);
         stream.Close();
     }
-
+    
+    public static void SavePlayer(PlayerData player)
+    {
+        // create a new player data object
+        PlayerData playerData = player;
+        // serialize the player data object
+        // save the serialized player data object to a file
+        BinaryFormatter formatter = new BinaryFormatter();
+        System.IO.FileStream stream = new System.IO.FileStream(_playerDataPath, System.IO.FileMode.Create);
+        formatter.Serialize(stream, playerData);
+        stream.Close();
+    }
     public static PlayerData LoadPlayer()
     {
         // load the serialized player data object from a file

@@ -121,16 +121,6 @@ public class InputManager : MonoBehaviour
             Hidecursor();
             Time.timeScale = 1;
         }
-        
-            if (!GetComponent<PlayerController>().Grounded)
-            {
-                _runAction.Disable();
-            }
-            else
-            {
-                _runAction.Enable();
-            }
- 
     }
 
 

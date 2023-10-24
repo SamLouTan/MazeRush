@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/jumpScenes/jumpSceneEasy.unity
     guid: 2dd0d9bb06ce3d146b9cc0c5b237b4db
   - enabled: 1
+    path: Assets/Scenes/FPSScene.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
     path: Assets/Scenes/mazeScene.unity
     guid: bed764f0227c4a94aaadc509143a27c7
   - enabled: 1
