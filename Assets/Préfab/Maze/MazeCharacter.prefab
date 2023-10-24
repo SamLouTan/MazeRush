@@ -843,7 +843,7 @@ MonoBehaviour:
   Camera: {fileID: 984040814273902376}
   UpperLimit: -40
   Bottomlimit: 70
-  Sensitivity: 21.9
+  Sensitivity: 1
   AirResistance: 0.8
   GroundCheck:
     serializedVersion: 2

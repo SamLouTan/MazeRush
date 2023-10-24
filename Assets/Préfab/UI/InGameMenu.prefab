@@ -896,7 +896,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 269857603898794596, guid: 65658d87b68f61349ae0e25cccfe684e, type: 3}
       propertyPath: m_MaxValue
-      value: 20
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 764364508826984428, guid: 65658d87b68f61349ae0e25cccfe684e, type: 3}
       propertyPath: m_SizeDelta.x
