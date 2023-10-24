@@ -1640,7 +1640,7 @@ Transform:
   m_GameObject: {fileID: 5396791367622109625}
   serializedVersion: 2
   m_LocalRotation: {x: -0.019603072, y: 0.00017174768, z: 0.0000033686078, w: 0.99980783}
-  m_LocalPosition: {x: 0, y: 0.0046, z: 0.0071}
+  m_LocalPosition: {x: 0, y: 0.0052, z: 0.0063}
   m_LocalScale: {x: 0.055240855, y: 0.055240862, z: 0.055240855}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2850,6 +2850,10 @@ PrefabInstance:
     - target: {fileID: 2042979682293005972, guid: 5f41768528ec7f545aa50f22e252232e, type: 3}
       propertyPath: m_Name
       value: PlayerUIJump
+      objectReference: {fileID: 0}
+    - target: {fileID: 2042979682293005972, guid: 5f41768528ec7f545aa50f22e252232e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
