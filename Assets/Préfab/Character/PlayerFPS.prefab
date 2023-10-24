@@ -140,7 +140,7 @@ GameObject:
   - component: {fileID: 3409423996274585720}
   - component: {fileID: 3523185770418762200}
   m_Layer: 0
-  m_Name: PlayerFPS 1
+  m_Name: PlayerFPS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
